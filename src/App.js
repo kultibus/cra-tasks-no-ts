@@ -9,7 +9,7 @@ function App() {
 
   return (
     <div>
-      <Header setVisible={setModal} />
+      <Header setVisibility={setModal} />
       <Modal visible={modal} setVisible={setModal} />
     </div>
   );

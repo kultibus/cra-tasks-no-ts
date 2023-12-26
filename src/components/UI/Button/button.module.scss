@@ -10,7 +10,11 @@
   transition: background-color 150ms linear, color 150ms linear;
   font-weight: 600;
   &:hover {
-    background-color: var(--color-green-light);
+		background-color: var(--color-green-light);
     color: var(--color-green-bright);
   }
+	&.modalOpened {
+		background-color: var(--color-green-light);
+		color: var(--color-green-bright);
+	}
 }
