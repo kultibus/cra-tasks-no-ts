@@ -1,6 +1,6 @@
 import styles from "./modal.module.scss";
 
-const Modal = ({ visible, setVisible }) => {
+const Modal = ({ children, visible, setVisible }) => {
   const rootClasses = [styles.modal];
 
   if (visible) {
@@ -9,10 +9,9 @@ const Modal = ({ visible, setVisible }) => {
 
   return (
     <div className={rootClasses.join(" ")} onClick={() => setVisible(false)}>
-      <div
-        className={styles.content}
-        onClick={(e) => e.stopPropagation()}
-      ></div>
+      <div className={styles.content} onClick={(e) => e.stopPropagation()}>
+        {children}
+      </div>
     </div>
   );
 };

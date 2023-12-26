@@ -1,0 +1,23 @@
+@mixin title() {
+  font-family: "Rubik";
+  font-size: 2em;
+  font-weight: 400;
+}
+
+@mixin subTitle() {
+  font-family: "Rubik";
+  font-size: 1.7em;
+  font-weight: 400;
+}
+
+@mixin button() {
+  font-family: "Rubik";
+  font-size: 1.3em;
+  font-weight: 400;
+}
+
+@mixin input() {
+  font-family: "Roboto";
+  font-size: 1em;
+  font-weight: 400;
+}

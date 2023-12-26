@@ -1,0 +1,22 @@
+@use "/src/styles/fontParams.scss" as *;
+
+form {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    h2 {
+      @include subTitle();
+      color: var(--color-green-light);
+    }
+  }
+
+  .inputs {
+    margin-bottom: 20px;
+    input:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
+}

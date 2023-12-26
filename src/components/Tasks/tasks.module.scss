@@ -1,0 +1,8 @@
+main {
+  background-color: var(--color-green-light);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  div:not(:last-child) {
+    border-right: var(--line);
+  }
+}

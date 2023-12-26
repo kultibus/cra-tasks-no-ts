@@ -1,0 +1,25 @@
+.cross {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	position: relative;
+	border-radius: 50%;
+	transition: transform var(--trs);
+	&::before,
+	&::after {
+		position: absolute;
+		content: "";
+		width: 140%;
+		height: 2px;
+		left: 50%;
+		top: 50%;
+		background-color: var(--color-green-light);
+		transition: background-color var(--trs);
+	}
+	&:before {
+		transform: translate(-50%, -50%) rotate(45deg);
+	}
+	&::after {
+		transform: translate(-50%, -50%) rotate(-45deg);
+	}
+}

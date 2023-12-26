@@ -1,4 +1,4 @@
-import styles from "./button.module.scss";
+import styles from "./buttons.module.scss";
 
 const Button = ({ modalOpened, children, ...props }) => {
   const rootClasses = [styles.button];

@@ -1,20 +1,30 @@
 import { useState } from "react";
-import "./App.scss";
+import styles from "./app.module.scss";
 import Header from "./components/Header/Header";
-import Modal from "./components/UI/Modal/Modal";
-import Button from "./components/UI/Button/Button";
+import TaskForm from "./components/TaskForm/TaskForm";
+import Tasks from "./components/Tasks/Tasks";
+import Modal from "./components/UI/modal/Modal";
+import { close } from "./utils/closeOnEsc";
 
 function App() {
   const [modal, setModal] = useState(false);
+  const [tasks, setTasks] = useState([]);
 
-	//hello from pc
+  if (modal) document.addEventListener("keydown", close);
+  else document.removeEventListener("keydown", close);
 
-	//hello from laptop
+  const createTask = (newTask) => {
+    setTasks([...tasks, newTask]);
+    setModal(false);
+  };
 
   return (
-    <div>
-      <Header setVisibility={setModal} />
-      <Modal visible={modal} setVisible={setModal} />
+    <div className={styles.tasksManager}>
+      <Header modalState={modal} setModalState={setModal} />
+      <Modal visible={modal} setVisible={setModal}>
+        <TaskForm create={createTask} setModalState={setModal} />
+      </Modal>
+      <Tasks tasks={tasks} />
     </div>
   );
 }

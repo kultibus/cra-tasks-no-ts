@@ -1,4 +1,6 @@
-@use "./theme.scss";
+@use "./vars.scss";
+
+$line: 2px solid var(--color-primary-main);
 
 * {
   margin: 0;
@@ -7,9 +9,11 @@
 }
 
 :root {
-  @each $colorName, $colorValues in theme.$theme {
+  @each $colorName, $colorValues in vars.$theme {
     @each $valueName, $value in $colorValues {
       --color-#{$colorName}-#{$valueName}: #{$value};
     }
   }
+  --trs: #{vars.$trs};
+  --line: #{vars.$line};
 }

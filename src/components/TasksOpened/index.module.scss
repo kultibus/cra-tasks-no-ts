@@ -1,0 +1,16 @@
+@use "/src/styles/fontParams.scss" as *;
+
+.taskList {
+  h2 {
+    @include subTitle();
+    background: var(--color-white-full);
+    background: var(--color-blue-dark);
+    color: var(--color-green-bright);
+    font-weight: 600;
+    text-align: center;
+    line-height: 2;
+    padding: 0 5px;
+    background-image: linear-gradient();
+    overflow: auto;
+  }
+}
