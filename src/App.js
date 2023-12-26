@@ -9,6 +9,8 @@ function App() {
 
 	//hello from pc
 
+	//hello from laptop
+
   return (
     <div>
       <Header setVisibility={setModal} />
