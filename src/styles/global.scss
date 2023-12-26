@@ -1,0 +1,15 @@
+@use "./theme.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  @each $colorName, $colorValues in theme.$theme {
+    @each $valueName, $value in $colorValues {
+      --color-#{$colorName}-#{$valueName}: #{$value};
+    }
+  }
+}

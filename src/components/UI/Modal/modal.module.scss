@@ -1,0 +1,27 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-green-transp);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 150ms ease-in;
+
+  .content {
+    padding: 25px;
+    background: var(--color-green-bright);
+    border-radius: 5px;
+    min-width: 250px;
+  }
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
