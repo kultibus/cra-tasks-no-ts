@@ -7,6 +7,8 @@ import Button from "./components/UI/Button/Button";
 function App() {
   const [modal, setModal] = useState(false);
 
+	//hello from pc
+
   return (
     <div>
       <Header setVisibility={setModal} />
