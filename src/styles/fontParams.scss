@@ -1,12 +1,12 @@
 @mixin title() {
   font-family: "Rubik";
   font-size: 2em;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 @mixin subTitle() {
   font-family: "Rubik";
-  font-size: 1.7em;
+  font-size: 1.5em;
   font-weight: 400;
 }
 
@@ -17,6 +17,11 @@
 }
 
 @mixin input() {
+  font-family: "Roboto";
+  font-size: 1em;
+  font-weight: 400;
+}
+@mixin text() {
   font-family: "Roboto";
   font-size: 1em;
   font-weight: 400;

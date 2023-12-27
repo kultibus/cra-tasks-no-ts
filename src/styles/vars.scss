@@ -9,7 +9,9 @@ $theme: (
   ),
   "primary": (
     "main": "#347B98",
-    "transp": "rgba(52, 124, 152, 0.5)",
+    "grad":
+      "linear-gradient(0deg, rgba(52,130,152,1) 0%, rgba(45,163,196,1) 100%)",
+    "transp": "rgba(52, 124, 152, 0.8)",
   ),
   "secondary": (
     "main": "#E3F7D4",

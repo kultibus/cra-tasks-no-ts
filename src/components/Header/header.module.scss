@@ -6,8 +6,10 @@
   align-items: center;
   padding: 15px;
   background-color: var(--color-primary-main);
+	background: var(--color-primary-grad);
   h1 {
     @include title;
-    color: var(--color-green-light);
+    // color: var(--color-green-light);
+    color: var(--color-blue-dark);
   }
 }

@@ -6,7 +6,7 @@ const TasksList = ({ title, tasks }) => {
   if (!tasks.length) {
     return (
       <div className={styles.taskList}>
-        <h2>No tasks {title.toLowerCase()}</h2>
+        <h2>No {title.toLowerCase()}</h2>
       </div>
     );
   }
@@ -14,9 +14,16 @@ const TasksList = ({ title, tasks }) => {
   return (
     <div className={styles.taskList}>
       <h2>{title}</h2>
-      {tasks.map((task) => (
-        <TaskItem key={task.id} task={task} />
-      ))}
+      <div className={styles.list}>
+        {tasks.map((task) => (
+          <TaskItem
+            key={task.id}
+            title={task.title}
+            description={task.description}
+            date={task.date}
+          />
+        ))}
+      </div>
     </div>
   );
 };

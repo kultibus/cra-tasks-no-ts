@@ -6,7 +6,7 @@ import Input from "../UI/input/Input";
 import styles from "./taskForm.module.scss";
 
 const TaskForm = ({ create, setModalState }) => {
-  const [task, setTask] = useState({ title: "", description: "" });
+  const [task, setTask] = useState({ title: "", description: "", date: "" });
 
   const addNewTask = (e) => {
     e.preventDefault();
@@ -19,8 +19,18 @@ const TaskForm = ({ create, setModalState }) => {
 
     create(newTask);
 
-    setTask({ title: "", description: "" });
+    setTask({ title: "", description: "", date: "" });
   };
+
+  const today = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const date = now.getDate();
+
+    return `${year}-${month}-${date}`;
+  };
+
 
   return (
     <form>
@@ -37,10 +47,24 @@ const TaskForm = ({ create, setModalState }) => {
           type="text"
           placeholder="Task title..."
         />
-        <Input type="text" placeholder="Task description..." />
-        <Input type="date" placeholder="Task description..." />
+        <Input
+          value={task.description}
+          onChange={(e) => setTask({ ...task, description: e.target.value })}
+          type="text"
+          placeholder="Task description..."
+        />
+        <Input
+          value={task.date}
+          onChange={(e) => {
+            setTask({ ...task, date: e.target.value });
+          }}
+          type="date"
+					min={today()}
+        />
       </div>
-      <Button onClick={addNewTask}>Create new task</Button>
+      <Button type="submit" onClick={addNewTask}>
+        Create new task
+      </Button>
     </form>
   );
 };
