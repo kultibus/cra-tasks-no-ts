@@ -1,23 +1,40 @@
 @use "/src/styles/fontParams.scss" as *;
 
 .taskList {
-  h2 {
-    @include subTitle();
+  .title {
+    padding: 0 5px;
+    height: 50px;
     background: var(--color-blue-dark);
     color: var(--color-green-bright);
-    font-weight: 600;
-    text-align: center;
-    line-height: 2;
-    padding: 0 5px;
-    transition: all var(--trs);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+      @include subTitle();
+      font-weight: 600;
+    }
   }
+
   .list {
-		height: calc(100vh - 90px);
-		overflow: auto;
+    height: calc(100vh - 90px - 50px);
+    overflow: auto;
 
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 20px 15px;
     gap: 20px;
+
+    &::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: var(--color-primary-main);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--color-blue-dark);
+    }
   }
 }
