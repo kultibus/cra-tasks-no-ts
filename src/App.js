@@ -8,13 +8,15 @@ import { close } from "./utils/closeOnEsc";
 
 function App() {
   const [modal, setModal] = useState(false);
-  const [tasks, setTasks] = useState([]);
+  // const [newTasks, setNewTasks] = useState([]);
+  const [newTask, setNewTask] = useState();
 
   if (modal) document.addEventListener("keydown", close);
   else document.removeEventListener("keydown", close);
 
   const createTask = (newTask) => {
-    setTasks([...tasks, newTask]);
+    // setNewTasks([...newTasks, newTask]);
+    setNewTask(newTask);
     setModal(false);
   };
 
@@ -24,7 +26,7 @@ function App() {
       <Modal visible={modal} setVisible={setModal}>
         <TaskForm create={createTask} setModalState={setModal} />
       </Modal>
-      <Tasks tasks={tasks} />
+      <Tasks newTask={newTask} />
     </div>
   );
 }

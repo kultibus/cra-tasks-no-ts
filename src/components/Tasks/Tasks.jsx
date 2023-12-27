@@ -1,17 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TasksList from "../TasksOpened/TasksList";
 import styles from "./tasks.module.scss";
 
-const Tasks = ({ tasks }) => {
-  const [tasksOpened, setTasksOpened] = useState([]);
-  // const [tasksInProcess, setTasksInProcess] = useState([])
-  // const [tasksAccomplished, setTasksAccomplished] = useState([])
+const Tasks = ({ newTask }) => {
+  const [boards, setBoards] = useState([
+    { id: 1, title: "Opened tasks", tasks: [] },
+    { id: 2, title: "Tasks in process", tasks: [] },
+    { id: 3, title: "Accomplished tasks", tasks: [] },
+  ]);
+
+  useEffect(() => {
+    if (newTask) {
+      setBoards([
+        { ...boards[0], tasks: [...boards[0].tasks, newTask] },
+        boards[1],
+        boards[2],
+      ]);
+    }
+  }, [newTask]);
 
   return (
     <main>
-      <TasksList tasks={tasks} title={"Opened tasks"} />
-      <TasksList tasks={tasks} title={"Tasks in process"} />
-      <TasksList tasks={tasks} title={"Tasks accomplished"} />
+      {boards.map((board) => (
+        <TasksList key={board.id} title={board.title} tasks={board.tasks} />
+      ))}
     </main>
   );
 };

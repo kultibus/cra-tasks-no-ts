@@ -14,7 +14,6 @@ const TaskForm = ({ create, setModalState }) => {
     const newTask = {
       ...task,
       id: Date.now(),
-      status: "opened",
     };
 
     create(newTask);
@@ -31,7 +30,6 @@ const TaskForm = ({ create, setModalState }) => {
     return `${year}-${month}-${date}`;
   };
 
-
   return (
     <form>
       <div className={styles.header}>
@@ -46,7 +44,6 @@ const TaskForm = ({ create, setModalState }) => {
           onChange={(e) => setTask({ ...task, title: e.target.value })}
           type="text"
           placeholder="Task title..."
-					// required={'required'}
         />
         <Input
           value={task.description}
@@ -60,7 +57,7 @@ const TaskForm = ({ create, setModalState }) => {
             setTask({ ...task, date: e.target.value });
           }}
           type="date"
-					min={today()}
+          min={today()}
         />
       </div>
       <Button type="submit" onClick={addNewTask}>
