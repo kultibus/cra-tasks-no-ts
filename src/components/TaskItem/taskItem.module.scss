@@ -4,12 +4,12 @@
   width: 100%;
   border-radius: 10px;
   background-color: var(--color-primary-main);
-  padding: 10px;
+  padding: 20px;
   cursor: grab;
   transition: background-color var(--trs), box-shadow var(--trs);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 
   &:hover {
     background: var(--color-blue-bright);
@@ -34,30 +34,25 @@
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      button {
-        cursor: pointer;
-        background-color: transparent;
-        border: none;
-        img {
-          display: block;
-          color: red;
-          // background-color: red;
-          max-width: 25px;
-        }
-      }
     }
   }
 
   .descr {
-    color: var(--color-black-semi);
+    color: var(--color-blue-dark);
     @include text();
   }
 
   .accomplish {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     @include text();
     color: var(--color-green-light);
+
     .date {
-      border: 1px solid #000;
+      border-radius: 5px;
+      padding: 2px 7px;
+      border: 2px solid var(--color-green-light);
     }
   }
 }

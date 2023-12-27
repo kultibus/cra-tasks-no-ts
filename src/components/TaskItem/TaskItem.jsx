@@ -1,9 +1,9 @@
 import delIcon from "../../assets/icons/del.png";
 import editIcon from "../../assets/icons/edit.png";
+import ButtonIcon from "../UI/buttons/ButtonIcon";
 import styles from "./taskItem.module.scss";
 
 const TaskItem = ({ title, description, date }) => {
-  // const expDate = new Date(date);
 
   const expDate = (date) => {
     const monthNames = [
@@ -34,12 +34,8 @@ const TaskItem = ({ title, description, date }) => {
       <div className={styles.title}>
         <h3>{title || "Some Title"}</h3>
         <div className={styles.btns}>
-          <button type="button">
-            <img src={editIcon} alt="Edit task button" />
-          </button>
-          <button type="button">
-            <img src={delIcon} alt="Delete task button" />
-          </button>
+          <ButtonIcon icon={editIcon} altText={"Edit task icon"} />
+          <ButtonIcon icon={delIcon} altText={"Delete task icon"} />
         </div>
       </div>
       <div className={styles.descr}>

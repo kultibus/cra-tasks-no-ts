@@ -5,9 +5,6 @@
   border-radius: 10px;
   border: none;
   @include button();
-  // font-family: "Rubik";
-  // font-size: 1.3em;
-  // font-weight: 400;
   display: flex;
   background-color: var(--color-green-bright);
   cursor: pointer;
@@ -29,5 +26,30 @@
   &.modalOpened {
     background-color: var(--color-green-light);
     color: var(--color-green-bright);
+  }
+}
+
+.buttonIcon {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  width: 30px;
+
+  img {
+    display: block;
+    width: 100%;
+  }
+
+  :hover {
+    animation: iconRotate 500ms infinite linear;
+  }
+}
+
+@keyframes iconRotate {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
   }
 }

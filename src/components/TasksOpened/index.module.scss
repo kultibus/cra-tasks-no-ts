@@ -12,9 +12,12 @@
     transition: all var(--trs);
   }
   .list {
+		height: calc(100vh - 90px);
+		overflow: auto;
+
     display: flex;
     flex-direction: column;
-    padding: 10px;
-    gap: 10px;
+    padding: 20px;
+    gap: 20px;
   }
 }

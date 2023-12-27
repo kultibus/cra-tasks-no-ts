@@ -46,6 +46,7 @@ const TaskForm = ({ create, setModalState }) => {
           onChange={(e) => setTask({ ...task, title: e.target.value })}
           type="text"
           placeholder="Task title..."
+					// required={'required'}
         />
         <Input
           value={task.description}
