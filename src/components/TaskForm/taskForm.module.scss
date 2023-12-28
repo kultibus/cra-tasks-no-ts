@@ -19,4 +19,15 @@ form {
       margin-bottom: 15px;
     }
   }
+
+  .submit {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    & > div {
+      @include text();
+      font-weight: 600;
+      color: var(--color-green-light);
+    }
+  }
 }

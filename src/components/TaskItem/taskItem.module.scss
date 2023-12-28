@@ -6,10 +6,18 @@
   background-color: var(--color-primary-main);
   padding: 20px;
   cursor: grab;
-  transition: background-color var(--trs), box-shadow var(--trs);
+  transition: background-color var(--trs), box-shadow var(--trs), opacity var(--trs);
   display: flex;
   flex-direction: column;
   gap: 20px;
+	visibility: hidden;
+	opacity: 0;
+	
+	&.visible {
+		visibility: visible;
+		opacity: 1;
+
+	}
 
   &:hover {
     background: var(--color-blue-bright);

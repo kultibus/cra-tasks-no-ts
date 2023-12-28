@@ -1,9 +1,17 @@
+import { useEffect, useState } from "react";
 import delIcon from "../../assets/icons/del.png";
 import editIcon from "../../assets/icons/edit.png";
 import ButtonIcon from "../UI/buttons/ButtonIcon";
 import styles from "./taskItem.module.scss";
 
 const TaskItem = ({ title, description, date }) => {
+  const [rootStyles, setRootStyles] = useState([styles.task]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setRootStyles([...rootStyles, styles.visible]);
+    });
+  }, []);
 
   const expDate = (date) => {
     const monthNames = [
@@ -30,18 +38,15 @@ const TaskItem = ({ title, description, date }) => {
   };
 
   return (
-    <div className={styles.task}>
+    <div className={rootStyles.join(" ")}>
       <div className={styles.title}>
-        <h3>{title || "Some Title"}</h3>
+        <h3>{title}</h3>
         <div className={styles.btns}>
           <ButtonIcon icon={editIcon} altText={"Edit task icon"} />
           <ButtonIcon icon={delIcon} altText={"Delete task icon"} />
         </div>
       </div>
-      <div className={styles.descr}>
-        {description ||
-          "Ullam et saepe reiciendis voluptatem adipiscisit amet autem assumenda provident rerum culpaquis hic commodi nesciunt rem tenetur doloremque ipsam iurequis sunt voluptatem rerum illo velit"}
-      </div>
+      <div className={styles.descr}>{description}</div>
       <div className={styles.accomplish}>
         <div>Accomplish till:</div>
         <div className={styles.date}>{expDate(date)}</div>

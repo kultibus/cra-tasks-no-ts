@@ -8,7 +8,7 @@
   color: var(--color-green-bright);
   outline: none;
   transition: border var(--trs);
-	@include input();
+  @include input();
   background: transparent;
 
   &::placeholder {
@@ -23,7 +23,7 @@
     }
   }
 
-  // &:not(:last-child) {
-  //   margin-bottom: 15px;
-  // }
+  &.noValidate {
+    border: 2px solid var(--color-green-light);
+  }
 }

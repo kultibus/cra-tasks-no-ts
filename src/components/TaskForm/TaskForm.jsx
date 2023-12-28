@@ -1,29 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../UI/buttons/Button";
 import Cross from "../UI/icons/Cross";
 import Input from "../UI/input/Input";
 
 import styles from "./taskForm.module.scss";
 
-const TaskForm = ({ create, setModalState }) => {
+const TaskForm = ({ create, setModalState, modal }) => {
   const [task, setTask] = useState({ title: "", description: "", date: "" });
-	const [validate, setValidate] = useState(false)
+  const [noValidate, setNoValidate] = useState(false);
 
   const addNewTask = (e) => {
     e.preventDefault();
 
-    if (task.title && task.description && task.date) {
-		}
-		const newTask = {
-			...task,
-			id: Date.now(),
-		};
+    if (task.title) {
+      const newTask = {
+        ...task,
+        id: Date.now(),
+      };
 
-		create(newTask);
+      create(newTask);
 
-		setTask({ title: "", description: "", date: "" });
+      setTask({ title: "", description: "", date: "" });
 
+      setNoValidate(false);
+    } else {
+      setNoValidate(true);
+    }
   };
+
+  useEffect(() => {
+    if (!modal) {
+      setNoValidate(false);
+    }
+  }, [modal]);
 
   const today = () => {
     const now = new Date();
@@ -45,11 +54,13 @@ const TaskForm = ({ create, setModalState }) => {
       <div className={styles.inputs}>
         <Input
           value={task.title}
-          onChange={(e) => setTask({ ...task, title: e.target.value })}
+          onChange={(e) => {
+            setTask({ ...task, title: e.target.value });
+            setNoValidate(false);
+          }}
           type="text"
           placeholder="Task title..."
-          required
-          autocomplite={"off"}
+          noValidate={noValidate}
         />
         <Input
           value={task.description}
@@ -66,9 +77,12 @@ const TaskForm = ({ create, setModalState }) => {
           min={today()}
         />
       </div>
-      <Button type="submit" onClick={addNewTask}>
-        Create new task
-      </Button>
+      <div className={styles.submit}>
+        <Button type="submit" onClick={addNewTask}>
+          Create new task
+        </Button>
+        {noValidate && <div>Task title is required to create a new task!</div>}
+      </div>
     </form>
   );
 };
