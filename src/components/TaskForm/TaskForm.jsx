@@ -7,18 +7,22 @@ import styles from "./taskForm.module.scss";
 
 const TaskForm = ({ create, setModalState }) => {
   const [task, setTask] = useState({ title: "", description: "", date: "" });
+	const [validate, setValidate] = useState(false)
 
   const addNewTask = (e) => {
     e.preventDefault();
 
-    const newTask = {
-      ...task,
-      id: Date.now(),
-    };
+    if (task.title && task.description && task.date) {
+		}
+		const newTask = {
+			...task,
+			id: Date.now(),
+		};
 
-    create(newTask);
+		create(newTask);
 
-    setTask({ title: "", description: "", date: "" });
+		setTask({ title: "", description: "", date: "" });
+
   };
 
   const today = () => {
@@ -44,6 +48,8 @@ const TaskForm = ({ create, setModalState }) => {
           onChange={(e) => setTask({ ...task, title: e.target.value })}
           type="text"
           placeholder="Task title..."
+          required
+          autocomplite={"off"}
         />
         <Input
           value={task.description}

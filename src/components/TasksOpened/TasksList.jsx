@@ -13,8 +13,6 @@ const TasksList = ({ title, tasks }) => {
     );
   }
 
-	console.log(tasks)
-
   return (
     <div className={styles.taskList}>
       <div className={styles.title}>
