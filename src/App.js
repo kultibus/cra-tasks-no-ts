@@ -23,6 +23,8 @@ function App() {
     setModal(false);
   };
 
+
+
   return (
     <div className={styles.tasksManager}>
       <Header modalState={modal} setModalState={setModal} />

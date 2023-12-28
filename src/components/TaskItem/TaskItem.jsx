@@ -4,8 +4,10 @@ import editIcon from "../../assets/icons/edit.png";
 import ButtonIcon from "../UI/buttons/ButtonIcon";
 import styles from "./taskItem.module.scss";
 
-const TaskItem = ({ title, description, date }) => {
+const TaskItem = ({ title, description, date, remove, ...props }) => {
   const [rootStyles, setRootStyles] = useState([styles.task]);
+	 
+	// console.log(props)
 
   useEffect(() => {
     setTimeout(() => {
@@ -43,7 +45,11 @@ const TaskItem = ({ title, description, date }) => {
         <h3>{title}</h3>
         <div className={styles.btns}>
           <ButtonIcon icon={editIcon} altText={"Edit task icon"} />
-          <ButtonIcon icon={delIcon} altText={"Delete task icon"} />
+          <ButtonIcon
+            onClick={() => remove(props.task)}
+            icon={delIcon}
+            altText={"Delete task icon"}
+          />
         </div>
       </div>
       <div className={styles.descr}>{description}</div>

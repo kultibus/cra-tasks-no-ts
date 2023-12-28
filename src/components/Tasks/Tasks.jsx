@@ -19,10 +19,26 @@ const Tasks = ({ newTask }) => {
     }
   }, [newTask]);
 
+  const removeTask = (task) => {
+    setBoards(
+      boards.map((board) => ({
+        ...board,
+        tasks: board.tasks.filter((t) => t.id !== task.id),
+      }))
+    );
+  };
+
+  console.log(boards);
+
   return (
     <main>
       {boards.map((board) => (
-        <TasksList key={board.id} title={board.title} tasks={board.tasks} />
+        <TasksList
+          remove={removeTask}
+          key={board.id}
+          title={board.title}
+          tasks={board.tasks}
+        />
       ))}
     </main>
   );

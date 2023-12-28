@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./index.module.scss";
 import TaskItem from "../TaskItem/TaskItem";
 
-const TasksList = ({ title, tasks }) => {
+const TasksList = ({ title, tasks, remove }) => {
   if (!tasks.length) {
     return (
       <div className={styles.taskList}>
@@ -21,10 +21,12 @@ const TasksList = ({ title, tasks }) => {
       <div className={styles.list}>
         {tasks.map((task) => (
           <TaskItem
+            remove={remove}
             key={task.id}
             title={task.title}
             description={task.description}
             date={task.date}
+            task={task}
           />
         ))}
       </div>
