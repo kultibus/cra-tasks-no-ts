@@ -8,7 +8,9 @@ const Header = ({ setModalState, modalState }) => {
       <Button
         type={"button"}
         modalOpened={modalState}
-        onClick={() => setModalState(true)}
+        onClick={() => {
+          setModalState(true);
+        }}
       >
         Create new task
       </Button>

@@ -24,6 +24,7 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} fallbackElement={<div>Loading</div>} />
+    <App />
+    {/* <RouterProvider router={router} fallbackElement={<div>Loading</div>} /> */}
   </React.StrictMode>
 );

@@ -29,8 +29,6 @@ const Tasks = ({ newTask, boards, setBoards }) => {
     );
   };
 
-  console.log(boards);
-
   return (
     <main>
       {boards.map((board) => (

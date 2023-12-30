@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import TaskForm from "./components/TaskForm/TaskForm";
 import Tasks from "./components/Tasks/Tasks";
 import Modal from "./components/UI/modal/Modal";
+import { closeOnEsc } from "./utils/closeOnEsc";
 
 function App() {
   const [modal, setModal] = useState(false);
@@ -19,14 +20,9 @@ function App() {
     { id: 3, title: "Accomplished tasks", tasks: [] },
   ]);
 
-  const closeOnEsc = (e) => {
-    if (e.key === "Escape") {
-      setModal(false);
-    }
-  };
+  const [inputValidate, setInputValidate] = useState(false);
 
-  if (modal) document.addEventListener("keydown", closeOnEsc);
-  else document.removeEventListener("keydown", closeOnEsc);
+  closeOnEsc(modal, setModal);
 
   const onTaskCreate = () => {
     setBoards([
@@ -50,6 +46,8 @@ function App() {
       <Header modalState={modal} setModalState={setModal} />
       <Modal visible={modal} setVisible={setModal}>
         <TaskForm
+          inputValidate={inputValidate}
+          setInputValidate={setInputValidate}
           onTaskCreate={onTaskCreate}
           newTask={newTask}
           setNewTask={setNewTask}
