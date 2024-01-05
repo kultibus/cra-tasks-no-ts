@@ -1,15 +1,37 @@
+import { useEffect, useState } from "react";
 import styles from "./modal.module.scss";
 
 const Modal = ({ children, modalOpened, setModalOpened }) => {
-  const rootClasses = [styles.modal];
+  const [modalOpacity, setModalOpacity] = useState({});
 
-  if (modalOpened) {
-    rootClasses.push(styles.active);
-  }
+  useEffect(() => {
+    const closeOnEsc = (e) => {
+      if (e.key === "Escape") {
+        setModalOpened(false);
+      }
+    };
+
+    window.addEventListener("keydown", closeOnEsc);
+
+    setModalOpacity({
+      opacity: 1,
+      visibility: "visible",
+    });
+
+    return () => {
+      window.removeEventListener("keydown", closeOnEsc);
+
+      setModalOpacity({
+        opacity: 0,
+        visibility: "hidden",
+      });
+    };
+  }, []);
 
   return (
     <div
-      className={rootClasses.join(" ")}
+      className={styles.modal}
+      style={modalOpacity}
       onClick={() => setModalOpened(false)}
     >
       <div className={styles.content} onClick={(e) => e.stopPropagation()}>

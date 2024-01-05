@@ -12,17 +12,11 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity var(--trs);
-  // transition: opacity 2s;
 
   .content {
     padding: 25px;
     background: var(--color-primary-main);
     border-radius: 10px;
     min-width: 30%;
-  }
-
-  &.active {
-    opacity: 1;
-    visibility: visible;
   }
 }

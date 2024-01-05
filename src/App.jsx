@@ -34,19 +34,20 @@ function App() {
   return (
     <div className={styles.tasksManager}>
       <Header modalOpened={modalOpened} setModalOpened={setModalOpened} />
-      <Modal modalOpened={modalOpened} setModalOpened={setModalOpened}>
-        <TaskForm
-          // inputValidate={inputValidate}
-          // setInputValidate={setInputValidate}
-          onTaskCreate={onTaskCreate}
-          newTask={newTask}
-          setNewTask={setNewTask}
-          // createTask={createTask}
-          modalOpened={modalOpened}
-          setModalOpened={setModalOpened}
-        />
-      </Modal>
+
       <Tasks boards={boards} setBoards={setBoards} newTask={newTask} />
+
+      {modalOpened && (
+        <Modal modalOpened={modalOpened} setModalOpened={setModalOpened}>
+          <TaskForm
+            onTaskCreate={onTaskCreate}
+            newTask={newTask}
+            setNewTask={setNewTask}
+            modalOpened={modalOpened}
+            setModalOpened={setModalOpened}
+          />
+        </Modal>
+      )}
     </div>
   );
 }
