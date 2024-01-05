@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./app.module.scss";
 import Header from "./components/Header/Header";
 import TaskForm from "./components/TaskForm/TaskForm";
 import Tasks from "./components/Tasks/Tasks";
 import Modal from "./components/UI/modal/Modal";
-import { closeOnEsc } from "./utils/closeOnEsc";
 
 function App() {
-  const [modal, setModal] = useState(false);
+  const [modalOpened, setModalOpened] = useState(false);
   const [newTask, setNewTask] = useState({
     title: "",
     description: "",
@@ -20,10 +19,6 @@ function App() {
     { id: 3, title: "Accomplished tasks", tasks: [] },
   ]);
 
-  const [inputValidate, setInputValidate] = useState(false);
-
-  closeOnEsc(modal, setModal);
-
   const onTaskCreate = () => {
     setBoards([
       {
@@ -33,27 +28,22 @@ function App() {
       boards[1],
       boards[2],
     ]);
-    setModal(false);
+    setModalOpened(false);
   };
-
-  // const createTask = (newTask) => {
-  //   setNewTask(newTask);
-  //   setModal(false);
-  // };
 
   return (
     <div className={styles.tasksManager}>
-      <Header modalState={modal} setModalState={setModal} />
-      <Modal visible={modal} setVisible={setModal}>
+      <Header modalOpened={modalOpened} setModalOpened={setModalOpened} />
+      <Modal modalOpened={modalOpened} setModalOpened={setModalOpened}>
         <TaskForm
-          inputValidate={inputValidate}
-          setInputValidate={setInputValidate}
+          // inputValidate={inputValidate}
+          // setInputValidate={setInputValidate}
           onTaskCreate={onTaskCreate}
           newTask={newTask}
           setNewTask={setNewTask}
           // createTask={createTask}
-          modal={modal}
-          setModalState={setModal}
+          modalOpened={modalOpened}
+          setModalOpened={setModalOpened}
         />
       </Modal>
       <Tasks boards={boards} setBoards={setBoards} newTask={newTask} />

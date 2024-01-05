@@ -10,8 +10,9 @@
   transition: border var(--trs);
   @include input();
   background: transparent;
-
+	
   &::placeholder {
+		transition: color var(--trs);
     color: var(--color-green-bright);
   }
 
@@ -23,8 +24,8 @@
     }
   }
 
-	&.noValidate {
-		border: 2px solid var(--color-green-light);
-	}
 }
 
+.noValidate {
+	border: 2px solid var(--color-green-light);
+}

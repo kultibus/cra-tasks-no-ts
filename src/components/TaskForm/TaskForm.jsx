@@ -1,26 +1,35 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { getToday } from "../../utils/getToday";
 import Button from "../UI/buttons/Button";
 import Cross from "../UI/icons/Cross";
 import Input from "../UI/input/Input";
 import styles from "./taskForm.module.scss";
-import { getToday } from "../../utils/getToday";
 
 const TaskForm = (props) => {
   const {
     newTask,
     setNewTask,
     onTaskCreate,
-    setModalState,
-    inputValidate,
-    setInputValidate,
+    modalOpened,
+    setModalOpened,
+    // inputValidate,
+    // setInputValidate,
   } = props;
+
+  const [inputValidate, setInputValidate] = useState(true);
+
+  // const warning = () => {
+  //   if (!newTask.title) {
+  //     return <div>Task title is required to create a new task!</div>;
+  //   }
+  // };
 
   return (
     <form>
       <div className={styles.header}>
         <h2>Create task</h2>
 
-        <Button type={"button"} onClick={() => setModalState(false)}>
+        <Button type={"button"} onClick={() => setModalOpened(false)}>
           <Cross />
         </Button>
       </div>
@@ -30,11 +39,12 @@ const TaskForm = (props) => {
           value={newTask.title}
           onChange={(e) => {
             setNewTask({ ...newTask, title: e.target.value });
+          }}
+          onClick={() => {
             setInputValidate(true);
           }}
           type="text"
           placeholder="Task title..."
-          validate={inputValidate}
         />
 
         <Input
@@ -75,7 +85,9 @@ const TaskForm = (props) => {
           Create new task
         </Button>
         {!inputValidate && (
-          <div>Task title is required to create a new task!</div>
+          <div className={styles.warning}>
+            Task title is required to create a new task!
+          </div>
         )}
       </div>
     </form>

@@ -1,12 +1,12 @@
 import styles from "./input.module.scss";
 import cn from "classnames";
 
-const Input = ({ validate, ...props }) => {
+const Input = ({ inputValidate, ...props }) => {
   const rootStyles = [styles.input];
 
-  if (!validate) {
-    rootStyles.push(styles.noValidate);
-  }
+  // if (!inputValidate) {
+  //   rootStyles.push(styles.noValidate);
+  // }
 
   // return (
   //   <input

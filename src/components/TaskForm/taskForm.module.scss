@@ -24,10 +24,11 @@ form {
     display: flex;
     gap: 20px;
     align-items: center;
-    & > div {
+    .warning {
       @include text();
       font-weight: 600;
       color: var(--color-green-light);
     }
   }
+
 }
