@@ -1,14 +1,13 @@
+import cn from "classnames";
 import styles from "./buttons.module.scss";
 
+
 const Button = ({ modalOpened, children, ...props }) => {
-  const rootClasses = [styles.button];
-
-  if (modalOpened) {
-    rootClasses.push(styles.modalOpened);
-  }
-
   return (
-    <button className={rootClasses.join(" ")} {...props}>
+    <button
+      className={cn(styles.button, { [styles.modalOpened]: modalOpened })}
+      {...props}
+    >
       {children}
     </button>
   );

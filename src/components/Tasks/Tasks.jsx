@@ -1,24 +1,7 @@
-import { useEffect, useState } from "react";
 import TasksList from "../TasksOpened/TasksList";
 import styles from "./tasks.module.scss";
 
 const Tasks = ({ newTask, boards, setBoards }) => {
-  // const [boards, setBoards] = useState([
-  //   { id: 1, title: "Opened tasks", tasks: [] },
-  //   { id: 2, title: "Tasks in process", tasks: [] },
-  //   { id: 3, title: "Accomplished tasks", tasks: [] },
-  // ]);
-
-  //изменить на колбэк
-  // useEffect(() => {
-  //   if (newTask) {
-  //     setBoards([
-  //       { ...boards[0], tasks: [...boards[0].tasks, newTask] },
-  //       boards[1],
-  //       boards[2],
-  //     ]);
-  //   }
-  // }, [newTask]);
 
   const removeTask = (task) => {
     setBoards(
@@ -30,7 +13,7 @@ const Tasks = ({ newTask, boards, setBoards }) => {
   };
 
   return (
-    <main>
+    <main className={styles.main}>
       {boards.map((board) => (
         <TasksList
           remove={removeTask}

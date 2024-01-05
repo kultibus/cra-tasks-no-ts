@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import styles from "./modal.module.scss";
+import cn from "classnames";
 
-const Modal = ({ children, modalOpened, setModalOpened }) => {
-  const [modalOpacity, setModalOpacity] = useState({});
 
+export const Modal = ({ children, modalOpened, setModalOpened }) => {
   useEffect(() => {
     const closeOnEsc = (e) => {
       if (e.key === "Escape") {
@@ -13,25 +13,22 @@ const Modal = ({ children, modalOpened, setModalOpened }) => {
 
     window.addEventListener("keydown", closeOnEsc);
 
-    setModalOpacity({
-      opacity: 1,
-      visibility: "visible",
+    const timer = setTimeout(() => {
+      setOpacity({ [styles.opened]: modalOpened });
     });
 
     return () => {
       window.removeEventListener("keydown", closeOnEsc);
 
-      setModalOpacity({
-        opacity: 0,
-        visibility: "hidden",
-      });
+      clearTimeout(timer);
     };
   }, []);
 
+  const [opacity, setOpacity] = useState({});
+
   return (
     <div
-      className={styles.modal}
-      style={modalOpacity}
+      className={cn(styles.modal, opacity)}
       onClick={() => setModalOpened(false)}
     >
       <div className={styles.content} onClick={(e) => e.stopPropagation()}>
@@ -41,4 +38,3 @@ const Modal = ({ children, modalOpened, setModalOpened }) => {
   );
 };
 
-export default Modal;
