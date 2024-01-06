@@ -1,12 +1,12 @@
 import cn from "classnames";
+import { useContext } from "react";
 import delIcon from "../../assets/icons/del.png";
 import editIcon from "../../assets/icons/edit.png";
+import { ModalContext } from "../../context";
 import { useOpacity } from "../../hooks/useOpacity";
-import { expDate } from "../../utils/expDate";
+import { daysLeft, expDate } from "../../utils/expDate";
 import { ButtonIcon } from "../UI/buttons/ButtonIcon/ButtonIcon";
 import styles from "./taskItem.module.scss";
-import { useContext } from "react";
-import { ModalContext } from "../../context";
 
 export const TaskItem = ({ task }) => {
   const { title, description, date } = task;
@@ -22,9 +22,14 @@ export const TaskItem = ({ task }) => {
         <h3>{title}</h3>
 
         <div className={styles.btns}>
-          <ButtonIcon icon={editIcon} altText={"Edit task icon"} />
+          <ButtonIcon
+            type={"button"}
+            icon={editIcon}
+            altText={"Edit task icon"}
+          />
 
           <ButtonIcon
+            type={"button"}
             onClick={() => {
               setModalOpened(true);
               setModalType("removeTask");
@@ -38,10 +43,34 @@ export const TaskItem = ({ task }) => {
 
       <div className={styles.descr}>{description}</div>
 
-      <div className={styles.accomplish}>
-        <div>Accomplish till:</div>
+      <div className={styles.bottom}>
+        <div className={styles.row}>
+          <div>Days left:</div>
 
-        <div className={styles.date}>{expDate(date)}</div>
+          {/* <div className={styles.date}>{daysLeft(date)}</div> */}
+          {console.log(daysLeft(date))}
+          <div
+            className={cn(styles.date, {
+              [styles.threeDays]: daysLeft(date) <= 3,
+              [styles.week]: daysLeft(date) <= 7 && daysLeft(date) > 3,
+            })}
+          >
+            {daysLeft(date)}
+          </div>
+        </div>
+
+        <div className={styles.row}>
+          <div>Accomplish till:</div>
+
+          <div
+            className={cn(styles.date, {
+              [styles.threeDays]: daysLeft(date) <= 3,
+              [styles.week]: daysLeft(date) <= 7 && daysLeft(date) > 3,
+            })}
+          >
+            {expDate(date)}
+          </div>
+        </div>
       </div>
     </div>
   );
