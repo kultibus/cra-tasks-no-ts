@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { LayoutContext } from "./Layout";
-import Button from "./components/UI/buttons/Button";
+import { Button } from "./components/UI/buttons/Button/Button";
 
 export const AuthPage = () => {
   const { setAuth } = useContext(LayoutContext);

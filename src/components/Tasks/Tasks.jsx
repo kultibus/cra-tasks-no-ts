@@ -1,7 +1,7 @@
-import TasksList from "../TasksList/TasksList";
+import { TasksList } from "../TasksList/TasksList";
 import styles from "./tasks.module.scss";
 
-export const Tasks = ({  boards, setBoards }) => {
+export const Tasks = ({ boards, setBoards }) => {
   const removeTask = (task) => {
     setBoards(
       boards.map((board) => ({

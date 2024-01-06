@@ -1,8 +1,7 @@
 import cn from "classnames";
-import styles from "./buttons.module.scss";
+import styles from "./button.module.scss";
 
-
-const Button = ({ modalOpened, children, ...props }) => {
+export const Button = ({ modalOpened, children, ...props }) => {
   return (
     <button
       className={cn(styles.button, { [styles.modalOpened]: modalOpened })}
@@ -12,5 +11,3 @@ const Button = ({ modalOpened, children, ...props }) => {
     </button>
   );
 };
-
-export default Button;

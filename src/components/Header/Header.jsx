@@ -1,4 +1,4 @@
-import Button from "../UI/buttons/Button";
+import { Button } from "../UI/buttons/Button/Button";
 import styles from "./header.module.scss";
 
 export const Header = ({ setModalOpened, modalOpened }) => {

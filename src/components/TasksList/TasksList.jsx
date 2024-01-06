@@ -1,7 +1,7 @@
-import TaskItem from "../TaskItem/TaskItem";
+import { TaskItem } from "../TaskItem/TaskItem";
 import styles from "./index.module.scss";
 
-const TasksList = ({ title, tasks, remove }) => {
+export const TasksList = ({ title, tasks, remove }) => {
   if (!tasks.length) {
     return (
       <div className={styles.taskList}>
@@ -32,5 +32,3 @@ const TasksList = ({ title, tasks, remove }) => {
     </div>
   );
 };
-
-export default TasksList;

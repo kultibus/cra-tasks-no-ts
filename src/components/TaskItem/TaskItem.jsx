@@ -1,21 +1,16 @@
-import { useEffect, useState } from "react";
+import cn from "classnames";
 import delIcon from "../../assets/icons/del.png";
 import editIcon from "../../assets/icons/edit.png";
-import ButtonIcon from "../UI/buttons/ButtonIcon";
-import styles from "./taskItem.module.scss";
+import { useOpacity } from "../../hooks/useOpacity";
 import { expDate } from "../../utils/expDate";
+import { ButtonIcon } from "../UI/buttons/ButtonIcon/ButtonIcon";
+import styles from "./taskItem.module.scss";
 
-const TaskItem = ({ title, description, date, remove, ...props }) => {
-  const [rootStyles, setRootStyles] = useState([styles.task]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setRootStyles([...rootStyles, styles.visible]);
-    });
-  }, [rootStyles]);
+export const TaskItem = ({ title, description, date, remove, ...props }) => {
+  const opacity = useOpacity(styles.created, props.task);
 
   return (
-    <div className={rootStyles.join(" ")}>
+    <div className={cn(styles.task, opacity)}>
       <div className={styles.title}>
         <h3>{title}</h3>
 
@@ -40,5 +35,3 @@ const TaskItem = ({ title, description, date, remove, ...props }) => {
     </div>
   );
 };
-
-export default TaskItem;
