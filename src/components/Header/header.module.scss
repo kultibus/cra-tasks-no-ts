@@ -9,7 +9,6 @@
 	background: var(--color-primary-grad);
   h1 {
     @include title;
-    // color: var(--color-green-light);
     color: var(--color-blue-dark);
   }
 }

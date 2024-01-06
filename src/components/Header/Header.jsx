@@ -1,7 +1,7 @@
 import Button from "../UI/buttons/Button";
 import styles from "./header.module.scss";
 
-const Header = ({ setModalOpened, modalOpened }) => {
+export const Header = ({ setModalOpened, modalOpened }) => {
   return (
     <header className={styles.header}>
       <h1>Tasks manager</h1>
@@ -17,5 +17,3 @@ const Header = ({ setModalOpened, modalOpened }) => {
     </header>
   );
 };
-
-export default Header;
