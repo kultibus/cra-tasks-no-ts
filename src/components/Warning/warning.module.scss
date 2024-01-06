@@ -1,0 +1,12 @@
+@use "/src/styles/fontParams.scss" as *;
+
+.warning {
+  @include text();
+  font-weight: 600;
+  color: var(--color-green-light);
+  opacity: 0;
+  transition: opacity var(--trs);
+  &.show {
+    opacity: 1;
+  }
+}

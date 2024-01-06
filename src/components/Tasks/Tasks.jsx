@@ -1,4 +1,4 @@
-import TasksList from "../TasksOpened/TasksList";
+import TasksList from "../TasksList/TasksList";
 import styles from "./tasks.module.scss";
 
 const Tasks = ({ newTask, boards, setBoards }) => {

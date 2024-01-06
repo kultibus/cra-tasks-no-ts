@@ -3,29 +3,17 @@ import { getToday } from "../../utils/getToday";
 import Button from "../UI/buttons/Button";
 import Cross from "../UI/icons/Cross";
 import Input from "../UI/input/Input";
+import { Warning } from "../Warning/Warning";
 import styles from "./taskForm.module.scss";
 
-const TaskForm = (props) => {
-  const {
-    newTask,
-    setNewTask,
-    onTaskCreate,
-    modalOpened,
-    setModalOpened,
-    // inputValidate,
-    // setInputValidate,
-  } = props;
+export const TaskForm = (props) => {
+  const { newTask, setNewTask, onTaskCreate, modalOpened, setModalOpened } =
+    props;
 
   const [inputValidate, setInputValidate] = useState(true);
 
-  // const warning = () => {
-  //   if (!newTask.title) {
-  //     return <div>Task title is required to create a new task!</div>;
-  //   }
-  // };
-
   return (
-    <form>
+    <form className={styles.form}>
       <div className={styles.header}>
         <h2>Create task</h2>
 
@@ -45,6 +33,7 @@ const TaskForm = (props) => {
           }}
           type="text"
           placeholder="Task title..."
+          inputValidate={inputValidate}
         />
 
         <Input
@@ -84,14 +73,13 @@ const TaskForm = (props) => {
         >
           Create new task
         </Button>
+
         {!inputValidate && (
-          <div className={styles.warning}>
+          <Warning modalOpened={modalOpened}>
             Task title is required to create a new task!
-          </div>
+          </Warning>
         )}
       </div>
     </form>
   );
 };
-
-export default TaskForm;

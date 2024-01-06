@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./modal.module.scss";
 import cn from "classnames";
-
+import { useOpacity } from "../../../hooks/useOpacity";
 
 export const Modal = ({ children, modalOpened, setModalOpened }) => {
   useEffect(() => {
@@ -13,18 +13,12 @@ export const Modal = ({ children, modalOpened, setModalOpened }) => {
 
     window.addEventListener("keydown", closeOnEsc);
 
-    const timer = setTimeout(() => {
-      setOpacity({ [styles.opened]: modalOpened });
-    });
-
     return () => {
       window.removeEventListener("keydown", closeOnEsc);
-
-      clearTimeout(timer);
     };
   }, []);
 
-  const [opacity, setOpacity] = useState({});
+  const opacity = useOpacity(styles.opened, modalOpened);
 
   return (
     <div
@@ -37,4 +31,3 @@ export const Modal = ({ children, modalOpened, setModalOpened }) => {
     </div>
   );
 };
-

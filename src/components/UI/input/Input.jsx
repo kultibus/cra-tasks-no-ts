@@ -1,25 +1,19 @@
+import { useState } from "react";
 import styles from "./input.module.scss";
 import cn from "classnames";
 
 const Input = ({ inputValidate, ...props }) => {
-  const rootStyles = [styles.input];
+  const [validate, setValidate] = useState(true);
 
-  // if (!inputValidate) {
-  //   rootStyles.push(styles.noValidate);
-  // }
 
-  // return (
-  //   <input
-  //     {...props}
-  //     className={cn(styles.input, {
-  //       [styles.noValidate]: !validate,
-  //     })}
-  //   />
-  // );
+  if (inputValidate !== undefined) {
+    console.log(validate);
+    // setValidate("bye");
+    // setValidate({ ...validate, name: "basil" });
+    // setValidate({ ...validate, name: 'pete' });
+  }
 
-  // попгули либу classnames, она как раз корректно конкатенирует сласснеймы, в том числе и условные
-  // так можно, но в целом лучше использовать инструменты
-  return <input className={rootStyles.join(" ")} {...props} />;
+  return <input className={cn(styles.input)} {...props} />;
 };
 
 export default Input;
