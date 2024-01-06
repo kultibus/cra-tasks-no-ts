@@ -5,9 +5,16 @@ import { useOpacity } from "../../hooks/useOpacity";
 import { expDate } from "../../utils/expDate";
 import { ButtonIcon } from "../UI/buttons/ButtonIcon/ButtonIcon";
 import styles from "./taskItem.module.scss";
+import { useContext } from "react";
+import { ModalContext } from "../../context";
 
-export const TaskItem = ({ title, description, date, remove, ...props }) => {
-  const opacity = useOpacity(styles.created, props.task);
+export const TaskItem = ({ task }) => {
+  const { title, description, date } = task;
+
+  const opacity = useOpacity(styles.created, task);
+
+  const { setTaskToRemove, setModalType, setModalOpened } =
+    useContext(ModalContext);
 
   return (
     <div className={cn(styles.task, opacity)}>
@@ -18,7 +25,11 @@ export const TaskItem = ({ title, description, date, remove, ...props }) => {
           <ButtonIcon icon={editIcon} altText={"Edit task icon"} />
 
           <ButtonIcon
-            onClick={() => remove(props.task)}
+            onClick={() => {
+              setModalOpened(true);
+              setModalType("removeTask");
+              setTaskToRemove(task);
+            }}
             icon={delIcon}
             altText={"Delete task icon"}
           />

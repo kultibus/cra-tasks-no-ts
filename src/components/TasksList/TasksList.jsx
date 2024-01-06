@@ -1,7 +1,7 @@
 import { TaskItem } from "../TaskItem/TaskItem";
 import styles from "./index.module.scss";
 
-export const TasksList = ({ title, tasks, remove }) => {
+export const TasksList = ({ title, tasks }) => {
   if (!tasks.length) {
     return (
       <div className={styles.taskList}>
@@ -19,14 +19,7 @@ export const TasksList = ({ title, tasks, remove }) => {
       </div>
       <div className={styles.list}>
         {tasks.map((task) => (
-          <TaskItem
-            remove={remove}
-            key={task.id}
-            title={task.title}
-            description={task.description}
-            date={task.date}
-            task={task}
-          />
+          <TaskItem key={task.id} task={task} />
         ))}
       </div>
     </div>

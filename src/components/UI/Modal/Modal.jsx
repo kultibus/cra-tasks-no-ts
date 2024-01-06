@@ -1,20 +1,26 @@
 import cn from "classnames";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useOpacity } from "../../../hooks/useOpacity";
 import styles from "./modal.module.scss";
+import { ModalContext } from "../../../context";
 
 export const Modal = ({ children, modalOpened, setModalOpened }) => {
+  const { taskToRemove, removeTask, modalType } = useContext(ModalContext);
+
   useEffect(() => {
-    const closeOnEsc = (e) => {
+    const closeOnKey = (e) => {
       if (e.key === "Escape") {
         setModalOpened(false);
+      } else if (e.key === "Enter" && modalType === "removeTask") {
+        setModalOpened(false);
+        removeTask(taskToRemove);
       }
     };
 
-    window.addEventListener("keydown", closeOnEsc);
+    window.addEventListener("keydown", closeOnKey);
 
     return () => {
-      window.removeEventListener("keydown", closeOnEsc);
+      window.removeEventListener("keydown", closeOnKey);
     };
   }, [setModalOpened]);
 

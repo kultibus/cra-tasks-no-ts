@@ -1,0 +1,18 @@
+@use "/src/styles/fontParams.scss" as *;
+
+.cnt {
+  .heading {
+    @include subTitle();
+    color: var(--color-green-light);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .btns {
+    display: flex;
+    gap: 15px;
+    & button {
+      flex: 0 1 50%;
+    }
+  }
+}
