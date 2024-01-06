@@ -1,6 +1,5 @@
-import { useState } from "react";
-import styles from "./index.module.scss";
 import TaskItem from "../TaskItem/TaskItem";
+import styles from "./index.module.scss";
 
 const TasksList = ({ title, tasks, remove }) => {
   if (!tasks.length) {

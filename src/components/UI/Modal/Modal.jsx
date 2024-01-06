@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import styles from "./modal.module.scss";
 import cn from "classnames";
+import { useEffect } from "react";
 import { useOpacity } from "../../../hooks/useOpacity";
+import styles from "./modal.module.scss";
 
 export const Modal = ({ children, modalOpened, setModalOpened }) => {
   useEffect(() => {
@@ -16,7 +16,7 @@ export const Modal = ({ children, modalOpened, setModalOpened }) => {
     return () => {
       window.removeEventListener("keydown", closeOnEsc);
     };
-  }, []);
+  }, [setModalOpened]);
 
   const opacity = useOpacity(styles.opened, modalOpened);
 

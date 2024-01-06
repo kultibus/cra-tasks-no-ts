@@ -12,7 +12,7 @@ const TaskItem = ({ title, description, date, remove, ...props }) => {
     setTimeout(() => {
       setRootStyles([...rootStyles, styles.visible]);
     });
-  }, []);
+  }, [rootStyles]);
 
   return (
     <div className={rootStyles.join(" ")}>

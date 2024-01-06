@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./app.module.scss";
 import Header from "./components/Header/Header";
 import { TaskForm } from "./components/TaskForm/TaskForm";
-import Tasks from "./components/Tasks/Tasks";
+import {Tasks} from "./components/Tasks/Tasks";
 import { Modal } from "./components/UI/modal/Modal";
 
 function App() {

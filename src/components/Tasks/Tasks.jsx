@@ -1,8 +1,7 @@
 import TasksList from "../TasksList/TasksList";
 import styles from "./tasks.module.scss";
 
-const Tasks = ({ newTask, boards, setBoards }) => {
-
+export const Tasks = ({ newTask, boards, setBoards }) => {
   const removeTask = (task) => {
     setBoards(
       boards.map((board) => ({
@@ -25,5 +24,3 @@ const Tasks = ({ newTask, boards, setBoards }) => {
     </main>
   );
 };
-
-export default Tasks;

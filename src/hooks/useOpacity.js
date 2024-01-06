@@ -11,7 +11,7 @@ export const useOpacity = (cName, prop) => {
     return () => {
       clearTimeout(timer);
     };
-  }, []);
+  }, [cName, prop]);
 
   return opacity;
 };

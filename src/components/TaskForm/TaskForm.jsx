@@ -2,7 +2,7 @@ import { useState } from "react";
 import { getToday } from "../../utils/getToday";
 import Button from "../UI/buttons/Button";
 import Cross from "../UI/icons/Cross";
-import Input from "../UI/input/Input";
+import { Input } from "../UI/input/Input";
 import { Warning } from "../Warning/Warning";
 import styles from "./taskForm.module.scss";
 
