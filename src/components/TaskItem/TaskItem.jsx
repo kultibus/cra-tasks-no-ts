@@ -23,6 +23,10 @@ export const TaskItem = ({ task }) => {
 
         <div className={styles.btns}>
           <ButtonIcon
+						onClick={() => {
+							setModalOpened(true);
+							setModalType("editTask");
+						}}
             type={"button"}
             icon={editIcon}
             altText={"Edit task icon"}
@@ -47,8 +51,6 @@ export const TaskItem = ({ task }) => {
         <div className={styles.row}>
           <div>Days left:</div>
 
-          {/* <div className={styles.date}>{daysLeft(date)}</div> */}
-          {console.log(daysLeft(date))}
           <div
             className={cn(styles.date, {
               [styles.threeDays]: daysLeft(date) <= 3,

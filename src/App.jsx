@@ -68,6 +68,19 @@ function App() {
             <RemoveTask />
           </Modal>
         );
+
+      case "editTask":
+        return (
+          <Modal modalOpened={modalOpened} setModalOpened={setModalOpened}>
+            <TaskForm
+              onTaskCreate={onTaskCreate}
+              newTask={newTask}
+              setNewTask={setNewTask}
+              modalOpened={modalOpened}
+              setModalOpened={setModalOpened}
+            />
+          </Modal>
+        );
     }
   };
 
