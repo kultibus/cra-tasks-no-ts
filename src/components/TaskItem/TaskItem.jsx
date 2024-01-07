@@ -2,7 +2,7 @@ import cn from "classnames";
 import { useContext } from "react";
 import delIcon from "../../assets/icons/del.png";
 import editIcon from "../../assets/icons/edit.png";
-import { ModalContext } from "../../context";
+import { AppContext } from "../../context";
 import { useOpacity } from "../../hooks/useOpacity";
 import { daysLeft, expDate } from "../../utils/expDate";
 import { ButtonIcon } from "../UI/buttons/ButtonIcon/ButtonIcon";
@@ -13,8 +13,8 @@ export const TaskItem = ({ task }) => {
 
   const opacity = useOpacity(styles.created, task);
 
-  const { setTaskToRemove, setModalType, setModalOpened } =
-    useContext(ModalContext);
+  const { setCurrentTask, setModalType, setModalOpened } =
+    useContext(AppContext);
 
   return (
     <div className={cn(styles.task, opacity)}>
@@ -23,10 +23,11 @@ export const TaskItem = ({ task }) => {
 
         <div className={styles.btns}>
           <ButtonIcon
-						onClick={() => {
-							setModalOpened(true);
-							setModalType("editTask");
-						}}
+            onClick={() => {
+              setModalOpened(true);
+              setModalType("editTask");
+              setCurrentTask(task);
+            }}
             type={"button"}
             icon={editIcon}
             altText={"Edit task icon"}
@@ -37,7 +38,7 @@ export const TaskItem = ({ task }) => {
             onClick={() => {
               setModalOpened(true);
               setModalType("removeTask");
-              setTaskToRemove(task);
+              setCurrentTask(task);
             }}
             icon={delIcon}
             altText={"Delete task icon"}

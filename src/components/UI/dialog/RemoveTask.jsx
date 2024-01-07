@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { Button } from "../buttons/Button/Button";
 import styles from "./removeTask.module.scss";
-import { ModalContext } from "../../../context";
+import { AppContext } from "../../../context";
 
 export const RemoveTask = () => {
-  const { setModalOpened, taskToRemove, removeTask } = useContext(ModalContext);
+  const { setModalOpened, currentTask, removeTask } = useContext(AppContext);
 
   return (
     <form className={styles.cnt}>
@@ -17,7 +17,7 @@ export const RemoveTask = () => {
             console.log(e.key);
             e.preventDefault();
             setModalOpened(false);
-            removeTask(taskToRemove);
+            removeTask(currentTask);
           }}
         >
           Yes

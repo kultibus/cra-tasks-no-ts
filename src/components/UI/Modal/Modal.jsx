@@ -2,10 +2,10 @@ import cn from "classnames";
 import { useContext, useEffect } from "react";
 import { useOpacity } from "../../../hooks/useOpacity";
 import styles from "./modal.module.scss";
-import { ModalContext } from "../../../context";
+import { AppContext } from "../../../context";
 
 export const Modal = ({ children, modalOpened, setModalOpened }) => {
-  const { taskToRemove, removeTask, modalType } = useContext(ModalContext);
+  const { currentTask, removeTask, modalType } = useContext(AppContext);
 
   useEffect(() => {
     const closeOnKey = (e) => {
@@ -13,7 +13,7 @@ export const Modal = ({ children, modalOpened, setModalOpened }) => {
         setModalOpened(false);
       } else if (e.key === "Enter" && modalType === "removeTask") {
         setModalOpened(false);
-        removeTask(taskToRemove);
+        removeTask(currentTask);
       }
     };
 

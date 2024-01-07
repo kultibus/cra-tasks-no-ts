@@ -5,14 +5,14 @@ import { TaskForm } from "./components/TaskForm/TaskForm";
 import { Tasks } from "./components/Tasks/Tasks";
 import { Modal } from "./components/UI/Modal/Modal";
 import { RemoveTask } from "./components/UI/dialog/RemoveTask";
-import { ModalContext } from "./context";
+import { AppContext } from "./context";
 
 function App() {
   const [modalOpened, setModalOpened] = useState(false);
 
   const [modalType, setModalType] = useState("");
 
-  const [taskToRemove, setTaskToRemove] = useState({});
+  const [currentTask, setCurrentTask] = useState({});
 
   const [newTask, setNewTask] = useState({
     title: "",
@@ -37,6 +37,19 @@ function App() {
     ]);
     setModalOpened(false);
   };
+
+  // const onTaskCreate = () => {
+  //   setBoards(
+  //     boards.map((board, i) => {
+  //       if (i === 0) {
+  //         return 'hello'
+  //       }
+  //     })
+  //   );
+  //   setModalOpened(false);
+  // };
+
+	console.log(boards)
 
   const removeTask = (task) => {
     setBoards(
@@ -73,6 +86,7 @@ function App() {
         return (
           <Modal modalOpened={modalOpened} setModalOpened={setModalOpened}>
             <TaskForm
+              currentTask={currentTask}
               onTaskCreate={onTaskCreate}
               newTask={newTask}
               setNewTask={setNewTask}
@@ -85,18 +99,18 @@ function App() {
   };
 
   return (
-    <div className={styles.tasksManager}>
-      <ModalContext.Provider
-        value={{
-					removeTask,
-          taskToRemove,
-          setTaskToRemove,
-          modalType,
-          setModalType,
-          modalOpened,
-          setModalOpened,
-        }}
-      >
+    <AppContext.Provider
+      value={{
+        removeTask,
+        currentTask,
+        setCurrentTask,
+        modalType,
+        setModalType,
+        modalOpened,
+        setModalOpened,
+      }}
+    >
+      <div className={styles.App}>
         <Header
           setModalType={setModalType}
           modalOpened={modalOpened}
@@ -105,8 +119,8 @@ function App() {
         <Tasks boards={boards} setBoards={setBoards} newTask={newTask} />
 
         {modalOpened && modal()}
-      </ModalContext.Provider>
-    </div>
+      </div>
+    </AppContext.Provider>
   );
 }
 
