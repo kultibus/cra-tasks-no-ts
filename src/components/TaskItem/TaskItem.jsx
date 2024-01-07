@@ -37,7 +37,7 @@ export const TaskItem = ({ task }) => {
             type={"button"}
             onClick={() => {
               setModalOpened(true);
-              setModalType("removeTask");
+              setModalType("deleteTask");
               setCurrentTask(task);
             }}
             icon={delIcon}

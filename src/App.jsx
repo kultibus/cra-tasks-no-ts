@@ -1,10 +1,10 @@
 import { useState } from "react";
 import styles from "./app.module.scss";
 import { Header } from "./components/Header/Header";
-import { TaskForm } from "./components/TaskForm/TaskForm";
+import { TaskForm } from "./components/forms/TaskForm/TaskForm";
 import { Tasks } from "./components/Tasks/Tasks";
 import { Modal } from "./components/UI/Modal/Modal";
-import { RemoveTask } from "./components/UI/dialog/RemoveTask";
+import { RemoveTask } from "./components/forms/DeleteTask/DeleteTask";
 import { AppContext } from "./context";
 
 function App() {
@@ -26,32 +26,22 @@ function App() {
     { id: 3, title: "Accomplished tasks", tasks: [] },
   ]);
 
-  const onTaskCreate = () => {
-    setBoards([
-      {
-        ...boards[0],
-        tasks: [...boards[0].tasks, { ...newTask, id: Date.now() }],
-      },
-      boards[1],
-      boards[2],
-    ]);
+  const createTask = () => {
+    setBoards(
+      boards.map((board, i) => {
+        if (i === 0) {
+          return {
+            ...board,
+            tasks: [...board.tasks, { ...newTask, id: Date.now() }],
+          };
+        }
+        return board;
+      })
+    );
     setModalOpened(false);
   };
 
-  // const onTaskCreate = () => {
-  //   setBoards(
-  //     boards.map((board, i) => {
-  //       if (i === 0) {
-  //         return 'hello'
-  //       }
-  //     })
-  //   );
-  //   setModalOpened(false);
-  // };
-
-	console.log(boards)
-
-  const removeTask = (task) => {
+  const deleteTask = (task) => {
     setBoards(
       boards.map((board) => ({
         ...board,
@@ -66,7 +56,7 @@ function App() {
         return (
           <Modal modalOpened={modalOpened} setModalOpened={setModalOpened}>
             <TaskForm
-              onTaskCreate={onTaskCreate}
+              createTask={createTask}
               newTask={newTask}
               setNewTask={setNewTask}
               modalOpened={modalOpened}
@@ -75,7 +65,7 @@ function App() {
           </Modal>
         );
 
-      case "removeTask":
+      case "deleteTask":
         return (
           <Modal modalOpened={modalOpened} setModalOpened={setModalOpened}>
             <RemoveTask />
@@ -87,7 +77,7 @@ function App() {
           <Modal modalOpened={modalOpened} setModalOpened={setModalOpened}>
             <TaskForm
               currentTask={currentTask}
-              onTaskCreate={onTaskCreate}
+              createTask={createTask}
               newTask={newTask}
               setNewTask={setNewTask}
               modalOpened={modalOpened}
@@ -101,7 +91,7 @@ function App() {
   return (
     <AppContext.Provider
       value={{
-        removeTask,
+        deleteTask,
         currentTask,
         setCurrentTask,
         modalType,

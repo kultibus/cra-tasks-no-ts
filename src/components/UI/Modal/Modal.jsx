@@ -5,15 +5,15 @@ import styles from "./modal.module.scss";
 import { AppContext } from "../../../context";
 
 export const Modal = ({ children, modalOpened, setModalOpened }) => {
-  const { currentTask, removeTask, modalType } = useContext(AppContext);
+  const { currentTask, deleteTask, modalType } = useContext(AppContext);
 
   useEffect(() => {
     const closeOnKey = (e) => {
       if (e.key === "Escape") {
         setModalOpened(false);
-      } else if (e.key === "Enter" && modalType === "removeTask") {
+      } else if (e.key === "Enter" && modalType === "deleteTask") {
         setModalOpened(false);
-        removeTask(currentTask);
+        deleteTask(currentTask);
       }
     };
 
