@@ -7,60 +7,15 @@ import { Warning } from "../../Warning/Warning";
 import styles from "./createTask.module.scss";
 
 export const CreateTask = (props) => {
-  const {
-    currentTask,
-    setCurrentTask,
-    newTask,
-    setNewTask,
-    createTask,
-    editTask,
-    modalOpened,
-    setModalOpened,
-  } = props;
+  const { newTask, setNewTask, createTask, modalOpened, setModalOpened } =
+    props;
 
   const [inputValidate, setInputValidate] = useState(true);
-
-  const [form, setForm] = useState({
-    content: {
-      title: "Create new task",
-      btn: "Create new task",
-      warning: "Title is required to create a new task!",
-    },
-    values: {
-      title: newTask.title,
-      description: newTask.description,
-      date: newTask.date,
-    },
-    task: newTask,
-    setTask: setNewTask,
-    createTask: createTask,
-  });
-
-  useMemo(() => {
-    if (currentTask) {
-      setForm({
-        ...form,
-        content: {
-          title: `Edit "${currentTask.title.toUpperCase()}" task`,
-          btn: `Save changes`,
-          warning: `New title is required to edit the task!`,
-        },
-        values: {
-          title: currentTask.title,
-          description: currentTask.description,
-          date: currentTask.date,
-        },
-        task: currentTask,
-        setTask: setCurrentTask,
-        createTask: editTask,
-      });
-    }
-  }, [currentTask]);
 
   return (
     <form className={styles.form}>
       <div className={styles.header}>
-        <h2>{form.content.title}</h2>
+        <h2>Create new task</h2>
 
         <Button type={"button"} onClick={() => setModalOpened(false)}>
           <Cross />
@@ -115,11 +70,13 @@ export const CreateTask = (props) => {
             setNewTask({ title: "", description: "", date: "" });
           }}
         >
-          {form.content.btn}
+          Create new task
         </Button>
 
         {!inputValidate && (
-          <Warning modalOpened={modalOpened}>{form.content.warning}</Warning>
+          <Warning modalOpened={modalOpened}>
+            Title is required to create a new task!
+          </Warning>
         )}
       </div>
     </form>

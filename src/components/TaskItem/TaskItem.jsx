@@ -1,5 +1,5 @@
 import cn from "classnames";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import delIcon from "../../assets/icons/del.png";
 import editIcon from "../../assets/icons/edit.png";
 import { AppContext } from "../../context";
@@ -10,6 +10,10 @@ import styles from "./taskItem.module.scss";
 
 export const TaskItem = ({ task }) => {
   const { title, description, date } = task;
+
+  const today = date ? date : new Date(Date.now());
+
+  
 
   const opacity = useOpacity(styles.created, task);
 

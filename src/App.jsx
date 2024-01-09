@@ -6,6 +6,7 @@ import { Tasks } from "./components/Tasks/Tasks";
 import { Modal } from "./components/UI/Modal/Modal";
 import { RemoveTask } from "./components/forms/DeleteTask/DeleteTask";
 import { AppContext } from "./context";
+import { EditTask } from "./components/forms/EditTask/EditTask";
 
 function App() {
   const [modalOpened, setModalOpened] = useState(false);
@@ -26,35 +27,7 @@ function App() {
     { id: 3, title: "Accomplished tasks", tasks: [] },
   ]);
 
-  // const createTask = () => {
-  //   setBoards(
-  //     boards.map((board, i) => {
-  //       if (i === 0) {
-  //         return {
-  //           ...board,
-  //           tasks: [...board.tasks, { ...newTask, id: Date.now() }],
-  //         };
-  //       }
-  //       return board;
-  //     })
-  //   );
-  //   setModalOpened(false);
-  // };
-
   const createTask = () => {
-    setBoards(
-			[
-				...boards, boards[0]
-			]
-      boards.map((board, i) => ({
-        ...board,
-        tasks: [...board.tasks, { ...newTask, id: Date.now() }],
-      }))
-    );
-    setModalOpened(false);
-  };
-
-  const editTask = () => {
     setBoards(
       boards.map((board, i) => {
         if (i === 0) {
@@ -65,6 +38,21 @@ function App() {
         }
         return board;
       })
+    );
+    setModalOpened(false);
+  };
+
+  const editTask = (task, title, description, date) => {
+    setBoards(
+      boards.map((board) => ({
+        ...board,
+        tasks: board.tasks.map((t) => {
+          if (t.id === task.id) {
+            return { ...task, title, description, date };
+          }
+          return t;
+        }),
+      }))
     );
     setModalOpened(false);
   };
@@ -103,7 +91,7 @@ function App() {
       case "editTask":
         return (
           <Modal modalOpened={modalOpened} setModalOpened={setModalOpened}>
-            <CreateTask
+            <EditTask
               editTask={editTask}
               currentTask={currentTask}
               setCurrentTask={setCurrentTask}

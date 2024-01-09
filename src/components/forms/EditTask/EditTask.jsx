@@ -1,69 +1,23 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { getToday } from "../../../utils/getToday";
+import { Input } from "../../UI/Input/Input";
 import { Button } from "../../UI/buttons/Button/Button";
 import Cross from "../../UI/icons/Cross";
-import { Input } from "../../UI/Input/Input";
 import { Warning } from "../../Warning/Warning";
 import styles from "./editTask.module.scss";
 
-export const editTask = (props) => {
-  const {
-    currentTask,
-    newTask,
-    setNewTask,
-    createTask,
-    modalOpened,
-    setModalOpened,
-  } = props;
+export const EditTask = (props) => {
+  const { currentTask, setCurrentTask, editTask, modalOpened, setModalOpened } =
+    props;
 
   const [inputValidate, setInputValidate] = useState(true);
 
-  const content = useMemo(() => {
-    if (currentTask) {
-      return {
-        title: `Edit "${currentTask.title.toUpperCase()}" task`,
-        btn: `Save changes`,
-        warning: `New title is required to edit the task!`,
-      };
-    } else {
-      return {
-        title: "Create new task",
-        btn: "Create new task",
-        warning: "Title is required to create a new task!",
-      };
-    }
-  }, [currentTask]);
-
-  const [inputs, setInputs] = useState([
-    {
-      type: "title",
-      value: newTask.title,
-      setNewTask,
-      setInputValidate,
-      type: "text",
-      placeholder: "Task title...",
-      inputValidate,
-    },
-    {
-      type: "description",
-      value: newTask.description,
-      setNewTask,
-      type: "text",
-      placeholder: "Task description...",
-    },
-    {
-      type: "date",
-      value: newTask.date,
-      setNewTask,
-      type: "date",
-      getToday,
-    },
-  ]);
+  const [formTitle, setFormTitle] = useState(currentTask.title.toUpperCase());
 
   return (
     <form className={styles.form}>
       <div className={styles.header}>
-        <h2>{content.title}</h2>
+        <h2>Edit "{formTitle}" task</h2>
 
         <Button type={"button"} onClick={() => setModalOpened(false)}>
           <Cross />
@@ -71,23 +25,10 @@ export const editTask = (props) => {
       </div>
 
       <div className={styles.inputs}>
-        {inputs.map((input) => {
-          return (
-            <Input
-              value={input.value}
-              onChange={(e) => {
-                setNewTask({ ...newTask, [input.name]: e.target.value });
-              }}
-            />
-          );
-        })}
-      </div>
-
-      {/* <div className={styles.inputs}>
         <Input
-          value={newTask.title}
+          value={currentTask.title}
           onChange={(e) => {
-            setNewTask({ ...newTask, title: e.target.value });
+            setCurrentTask({ ...currentTask, title: e.target.value });
           }}
           onClick={() => {
             setInputValidate(true);
@@ -97,23 +38,23 @@ export const editTask = (props) => {
           inputValidate={inputValidate}
         />
         <Input
-          value={newTask.description}
+          value={currentTask.description}
           onChange={(e) =>
-            setNewTask({ ...newTask, description: e.target.value })
+            setCurrentTask({ ...currentTask, description: e.target.value })
           }
           type="text"
           placeholder="Task description..."
         />
 
         <Input
-          value={newTask.date}
+          value={currentTask.date}
           onChange={(e) => {
-            setNewTask({ ...newTask, date: e.target.value });
+            setCurrentTask({ ...currentTask, date: e.target.value });
           }}
           type="date"
           min={getToday()}
         />
-      </div> */}
+      </div>
 
       <div className={styles.submit}>
         <Button
@@ -121,21 +62,26 @@ export const editTask = (props) => {
           onClick={(e) => {
             e.preventDefault();
 
-            if (!newTask.title) {
+            if (!currentTask.title) {
               setInputValidate(false);
               return;
             }
 
-            createTask();
-
-            setNewTask({ title: "", description: "", date: "" });
+            editTask(
+              currentTask,
+              currentTask.title,
+              currentTask.description,
+              currentTask.date
+            );
           }}
         >
-          {content.btn}
+          Save changes
         </Button>
 
         {!inputValidate && (
-          <Warning modalOpened={modalOpened}>{content.warning}</Warning>
+          <Warning modalOpened={modalOpened}>
+            New title is required to edit the task!
+          </Warning>
         )}
       </div>
     </form>
