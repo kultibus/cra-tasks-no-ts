@@ -1,10 +1,12 @@
-import { useMemo, useState } from "react";
-import { getToday } from "../../../utils/getToday";
+import { useState } from "react";
+import { Input } from "../../UI/Input/Input";
 import { Button } from "../../UI/buttons/Button/Button";
 import Cross from "../../UI/icons/Cross";
-import { Input } from "../../UI/Input/Input";
 import { Warning } from "../../Warning/Warning";
 import styles from "./createTask.module.scss";
+import { DateHandler } from "../../../utils/dateHandler";
+
+const dateHandler = new DateHandler();
 
 export const CreateTask = (props) => {
   const { newTask, setNewTask, createTask, modalOpened, setModalOpened } =
@@ -50,7 +52,7 @@ export const CreateTask = (props) => {
             setNewTask({ ...newTask, date: e.target.value });
           }}
           type="date"
-          min={getToday()}
+          min={dateHandler.setMinDate()}
         />
       </div>
 

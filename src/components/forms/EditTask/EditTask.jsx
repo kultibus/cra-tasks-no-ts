@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { getToday } from "../../../utils/getToday";
 import { Input } from "../../UI/Input/Input";
 import { Button } from "../../UI/buttons/Button/Button";
 import Cross from "../../UI/icons/Cross";
 import { Warning } from "../../Warning/Warning";
 import styles from "./editTask.module.scss";
+import { DateHandler } from "../../../utils/dateHandler";
+
+const dateHandler = new DateHandler();
 
 export const EditTask = (props) => {
   const { currentTask, setCurrentTask, editTask, modalOpened, setModalOpened } =
@@ -52,7 +54,7 @@ export const EditTask = (props) => {
             setCurrentTask({ ...currentTask, date: e.target.value });
           }}
           type="date"
-          min={getToday()}
+          min={dateHandler.setMinDate()}
         />
       </div>
 

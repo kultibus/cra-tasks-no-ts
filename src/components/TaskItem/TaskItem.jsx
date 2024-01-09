@@ -1,19 +1,26 @@
 import cn from "classnames";
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import delIcon from "../../assets/icons/del.png";
 import editIcon from "../../assets/icons/edit.png";
 import { AppContext } from "../../context";
 import { useOpacity } from "../../hooks/useOpacity";
-import { daysLeft, expDate } from "../../utils/expDate";
+import { DateHandler, daysLeft } from "../../utils/dateHandler";
 import { ButtonIcon } from "../UI/buttons/ButtonIcon/ButtonIcon";
 import styles from "./taskItem.module.scss";
+
+// const dateHandler = new DateHandler();
 
 export const TaskItem = ({ task }) => {
   const { title, description, date } = task;
 
-  const today = date ? date : new Date(Date.now());
+	console.log(date)
 
-  
+
+  const dates = new DateHandler(date);
+
+  // useMemo(() => {
+  //   setDates(dateHandler.transformMonth(date));
+  // }, [date]);
 
   const opacity = useOpacity(styles.created, task);
 
@@ -58,11 +65,11 @@ export const TaskItem = ({ task }) => {
 
           <div
             className={cn(styles.date, {
-              [styles.threeDays]: daysLeft(date) <= 3,
-              [styles.week]: daysLeft(date) <= 7 && daysLeft(date) > 3,
+              [styles.threeDays]: dates.daysLeft <= 3,
+              [styles.week]: dates.daysLeft <= 7 && dates.daysLeft > 3,
             })}
           >
-            {daysLeft(date)}
+            {dates.daysLeft}
           </div>
         </div>
 
@@ -71,11 +78,11 @@ export const TaskItem = ({ task }) => {
 
           <div
             className={cn(styles.date, {
-              [styles.threeDays]: daysLeft(date) <= 3,
-              [styles.week]: daysLeft(date) <= 7 && daysLeft(date) > 3,
+              [styles.threeDays]: dates.daysLeft <= 3,
+              [styles.week]: dates.daysLeft <= 7 && dates.daysLeft > 3,
             })}
           >
-            {expDate(date)}
+            {dates.accomplishDate}
           </div>
         </div>
       </div>
