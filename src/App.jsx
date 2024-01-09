@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./app.module.scss";
 import { Header } from "./components/Header/Header";
-import { TaskForm } from "./components/forms/TaskForm/TaskForm";
+import { CreateTask } from "./components/forms/CreateTask/CreateTask";
 import { Tasks } from "./components/Tasks/Tasks";
 import { Modal } from "./components/UI/Modal/Modal";
 import { RemoveTask } from "./components/forms/DeleteTask/DeleteTask";
@@ -26,7 +26,35 @@ function App() {
     { id: 3, title: "Accomplished tasks", tasks: [] },
   ]);
 
+  // const createTask = () => {
+  //   setBoards(
+  //     boards.map((board, i) => {
+  //       if (i === 0) {
+  //         return {
+  //           ...board,
+  //           tasks: [...board.tasks, { ...newTask, id: Date.now() }],
+  //         };
+  //       }
+  //       return board;
+  //     })
+  //   );
+  //   setModalOpened(false);
+  // };
+
   const createTask = () => {
+    setBoards(
+			[
+				...boards, boards[0]
+			]
+      boards.map((board, i) => ({
+        ...board,
+        tasks: [...board.tasks, { ...newTask, id: Date.now() }],
+      }))
+    );
+    setModalOpened(false);
+  };
+
+  const editTask = () => {
     setBoards(
       boards.map((board, i) => {
         if (i === 0) {
@@ -55,7 +83,7 @@ function App() {
       case "createTask":
         return (
           <Modal modalOpened={modalOpened} setModalOpened={setModalOpened}>
-            <TaskForm
+            <CreateTask
               createTask={createTask}
               newTask={newTask}
               setNewTask={setNewTask}
@@ -75,11 +103,10 @@ function App() {
       case "editTask":
         return (
           <Modal modalOpened={modalOpened} setModalOpened={setModalOpened}>
-            <TaskForm
+            <CreateTask
+              editTask={editTask}
               currentTask={currentTask}
-              createTask={createTask}
-              newTask={newTask}
-              setNewTask={setNewTask}
+              setCurrentTask={setCurrentTask}
               modalOpened={modalOpened}
               setModalOpened={setModalOpened}
             />
