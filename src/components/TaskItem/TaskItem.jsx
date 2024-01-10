@@ -1,5 +1,5 @@
 import cn from "classnames";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import delIcon from "../../assets/icons/del.png";
 import editIcon from "../../assets/icons/edit.png";
 import { AppContext } from "../../context";
@@ -19,7 +19,10 @@ export const TaskItem = ({ task }) => {
     useContext(AppContext);
 
   return (
-    <div className={cn(styles.task, opacity)}>
+    <div
+      draggable="true"
+      className={cn(styles.task, opacity)}
+    >
       <div className={styles.title}>
         <h3>{title}</h3>
 
