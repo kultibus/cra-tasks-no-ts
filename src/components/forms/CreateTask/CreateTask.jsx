@@ -6,13 +6,13 @@ import { Warning } from "../../Warning/Warning";
 import styles from "./createTask.module.scss";
 import { DateHandler } from "../../../utils/dateHandler";
 
-const dateHandler = new DateHandler();
-
 export const CreateTask = (props) => {
   const { newTask, setNewTask, createTask, modalOpened, setModalOpened } =
     props;
 
   const [inputValidate, setInputValidate] = useState(true);
+
+  const dateHandler = new DateHandler();
 
   return (
     <form className={styles.form}>
@@ -52,7 +52,7 @@ export const CreateTask = (props) => {
             setNewTask({ ...newTask, date: e.target.value });
           }}
           type="date"
-          min={dateHandler.setMinDate()}
+          min={dateHandler.transformDate(new Date())}
         />
       </div>
 

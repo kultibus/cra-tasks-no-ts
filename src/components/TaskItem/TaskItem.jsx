@@ -1,26 +1,17 @@
 import cn from "classnames";
-import { useContext, useMemo, useState } from "react";
+import { useContext } from "react";
 import delIcon from "../../assets/icons/del.png";
 import editIcon from "../../assets/icons/edit.png";
 import { AppContext } from "../../context";
 import { useOpacity } from "../../hooks/useOpacity";
-import { DateHandler, daysLeft } from "../../utils/dateHandler";
+import { DateHandler } from "../../utils/dateHandler";
 import { ButtonIcon } from "../UI/buttons/ButtonIcon/ButtonIcon";
 import styles from "./taskItem.module.scss";
-
-// const dateHandler = new DateHandler();
 
 export const TaskItem = ({ task }) => {
   const { title, description, date } = task;
 
-	console.log(date)
-
-
   const dates = new DateHandler(date);
-
-  // useMemo(() => {
-  //   setDates(dateHandler.transformMonth(date));
-  // }, [date]);
 
   const opacity = useOpacity(styles.created, task);
 
@@ -37,7 +28,7 @@ export const TaskItem = ({ task }) => {
             onClick={() => {
               setModalOpened(true);
               setModalType("editTask");
-              setCurrentTask(task);
+              setCurrentTask({ ...task, date: dates.getTransformedDate() });
             }}
             type={"button"}
             icon={editIcon}
@@ -65,11 +56,12 @@ export const TaskItem = ({ task }) => {
 
           <div
             className={cn(styles.date, {
-              [styles.threeDays]: dates.daysLeft <= 3,
-              [styles.week]: dates.daysLeft <= 7 && dates.daysLeft > 3,
+              [styles.threeDays]: dates.getDaysLeft() <= 3,
+              [styles.week]:
+                dates.getDaysLeft() <= 7 && dates.getDaysLeft() > 3,
             })}
           >
-            {dates.daysLeft}
+            {dates.getDaysLeft()}
           </div>
         </div>
 
@@ -78,11 +70,12 @@ export const TaskItem = ({ task }) => {
 
           <div
             className={cn(styles.date, {
-              [styles.threeDays]: dates.daysLeft <= 3,
-              [styles.week]: dates.daysLeft <= 7 && dates.daysLeft > 3,
+              [styles.threeDays]: dates.getDaysLeft() <= 3,
+              [styles.week]:
+                dates.getDaysLeft() <= 7 && dates.getDaysLeft() > 3,
             })}
           >
-            {dates.accomplishDate}
+            {dates.getAccomplishDate()}
           </div>
         </div>
       </div>

@@ -21,30 +21,42 @@ export class DateHandler {
   ];
 
   constructor(date) {
-    this.expDate = date
+    this._expDate = date
       ? new Date(date)
       : new Date(this._year, this._month, this._date + 1);
-    this.accomplishDate = this.transformMonth();
-    this.daysLeft = this.cntDaysLeft();
+    this._daysLeft = this.cntDaysLeft(this._expDate);
+    this._accomplishDate = this.transformMonth(this._expDate);
+    this._transformedDate = this.transformDate(this._expDate);
   }
 
-  setMinDate() {
-    const month = this._month < 10 ? "0" + (this._month + 1) : this._month + 1;
-
-    const date = this._date < 10 ? "0" + this._date : this._date;
-
-    return `${this._year}-${month}-${date}`;
+  getDaysLeft() {
+    return this._daysLeft;
   }
 
-  cntDaysLeft() {
-    return `${Math.round(
-      (new Date(this.expDate) - this._now) / 1000 / 3600 / 24
-    )}`;
+  getAccomplishDate() {
+    return this._accomplishDate;
   }
 
-  transformMonth() {
-    return `${this.expDate.getDate()} ${
-      this._monthNames[this.expDate.getMonth()]
-    } ${this.expDate.getFullYear()}`;
+  getTransformedDate() {
+    return this._transformedDate;
+  }
+
+  transformDate(date) {
+    const month =
+      date.getMonth() < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+
+    const day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+
+    return `${date.getFullYear()}-${month}-${day}`;
+  }
+
+  cntDaysLeft(expDate) {
+    return `${Math.round((new Date(expDate) - new Date()) / 1000 / 3600 / 24)}`;
+  }
+
+  transformMonth(expDate) {
+    return `${expDate.getDate()} ${
+      this._monthNames[expDate.getMonth()]
+    } ${expDate.getFullYear()}`;
   }
 }

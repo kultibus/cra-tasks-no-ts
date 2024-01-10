@@ -16,6 +16,7 @@ export const EditTask = (props) => {
 
   const [formTitle, setFormTitle] = useState(currentTask.title.toUpperCase());
 
+
   return (
     <form className={styles.form}>
       <div className={styles.header}>
@@ -54,7 +55,7 @@ export const EditTask = (props) => {
             setCurrentTask({ ...currentTask, date: e.target.value });
           }}
           type="date"
-          min={dateHandler.setMinDate()}
+          min={dateHandler.transformDate(new Date())}
         />
       </div>
 
