@@ -8,8 +8,11 @@ import { DateHandler } from "../../utils/dateHandler";
 import { ButtonIcon } from "../UI/buttons/ButtonIcon/ButtonIcon";
 import styles from "./taskItem.module.scss";
 
-export const TaskItem = ({ task }) => {
+export const TaskItem = ({ task, ...props }) => {
   const { title, description, date } = task;
+
+  const { draggble, onDragOver, onDragLeave, onDragStart, onDragEnd, onDrop } =
+    props;
 
   const dates = new DateHandler(date);
 
@@ -19,8 +22,13 @@ export const TaskItem = ({ task }) => {
     useContext(AppContext);
 
   return (
-    <div
-      draggable="true"
+    <li
+      draggable={draggble}
+      onDragOver={onDragOver}
+      onDragLeave={onDragLeave}
+      onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
+      onDrop={onDrop}
       className={cn(styles.task, opacity)}
     >
       <div className={styles.title}>
@@ -82,6 +90,6 @@ export const TaskItem = ({ task }) => {
           </div>
         </div>
       </div>
-    </div>
+    </li>
   );
 };
