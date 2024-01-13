@@ -11,7 +11,7 @@ import { EditTask } from "./components/forms/EditTask/EditTask";
 function App() {
   const [modalOpened, setModalOpened] = useState(false);
 
-  const [modalType, setModalType] = useState("");
+  const [modalType, setModalType] = useState(null);
 
   const [currentTask, setCurrentTask] = useState({});
 
