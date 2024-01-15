@@ -3,7 +3,7 @@ import styles from "./app.module.scss";
 import { Header } from "./components/Header/Header";
 import { CreateTask } from "./components/forms/CreateTask/CreateTask";
 import { Tasks } from "./components/Tasks/Tasks";
-import { Modal } from "./components/UI/Modal/Modal";
+import { Modal } from "./components/UI/modal/Modal";
 import { RemoveTask } from "./components/forms/DeleteTask/DeleteTask";
 import { AppContext } from "./context";
 import { EditTask } from "./components/forms/EditTask/EditTask";

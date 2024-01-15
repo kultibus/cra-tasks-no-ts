@@ -46,20 +46,12 @@ export const TasksList = ({
     // e.target.style.opacity = 1;
 
     const currentIndex = currentBoard.tasks.indexOf(currentTask);
-    currentBoard.tasks.splice(currentIndex, 1);
+    const dropIndex = board.tasks.indexOf(task);
 
-    // const currentIndex = board.tasks.indexOf(currentTask);
-    // board.tasks.splice(currentIndex, 1);
-
-    let dropIndex = board.tasks.indexOf(task);
-
-    // if (dropIndex === -1) {
-		// 	board.tasks.splice(currentIndex + 1, 0, currentTask);
-		// }
-    board.tasks.splice(dropIndex+1, 0, currentTask);
-    // board.tasks.splice(dropIndex, 0, currentTask);
-
-    console.log(currentIndex, dropIndex);
+    if (dropIndex !== currentIndex) {
+      currentBoard.tasks.splice(currentIndex, 1);
+      board.tasks.splice(dropIndex, 0, currentTask);
+    }
 
     setBoards(
       boards.map((b) => {
