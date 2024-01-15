@@ -14,8 +14,7 @@ export const EditTask = (props) => {
 
   const [inputValidate, setInputValidate] = useState(true);
 
-  const [formTitle, setFormTitle] = useState(currentTask.title.toUpperCase());
-
+  const [formTitle] = useState(currentTask.title.toUpperCase());
 
   return (
     <form className={styles.form}>

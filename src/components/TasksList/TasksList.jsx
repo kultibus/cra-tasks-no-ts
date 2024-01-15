@@ -18,30 +18,18 @@ export const TasksList = ({
 
   const [currentBoard, setCurrentBoard] = useState(null);
 
-  if (!board.tasks.length) {
-    return (
-      <div className={styles.taskList}>
-        <div className={styles.title}>
-          <h2>No {board.title.toLowerCase()}</h2>
-        </div>
-      </div>
-    );
-  }
-
-
-
   function dragOverHandler(e) {
     e.preventDefault();
-		
-		const item = e.target.closest('li')
-		
-    if (item) {
-      item.style.opacity = 0.5;
-    }
+
+    // const item = e.target.closest("li");
+
+    // if (item) {
+    //   item.style.opacity = 0.5;
+    // }
   }
 
   function dragLeaveHandler(e) {
-    e.target.style.opacity = 1;
+    // e.target.style.opacity = 1;
   }
 
   function dragStartHandler(e, board, task) {
@@ -50,18 +38,28 @@ export const TasksList = ({
   }
 
   function dragEndHandler(e) {
-    e.target.style.opacity = 1;
+    // e.target.style.opacity = 1;
   }
 
   function dropHandler(e, board, task) {
     e.preventDefault();
+    // e.target.style.opacity = 1;
 
     const currentIndex = currentBoard.tasks.indexOf(currentTask);
     currentBoard.tasks.splice(currentIndex, 1);
-    console.log(currentBoard.tasks);
 
-    const dropIndex = board.tasks.indexOf(task);
-    board.tasks.splice(dropIndex + 1, 0, currentTask);
+    // const currentIndex = board.tasks.indexOf(currentTask);
+    // board.tasks.splice(currentIndex, 1);
+
+    let dropIndex = board.tasks.indexOf(task);
+
+    // if (dropIndex === -1) {
+		// 	board.tasks.splice(currentIndex + 1, 0, currentTask);
+		// }
+    board.tasks.splice(dropIndex+1, 0, currentTask);
+    // board.tasks.splice(dropIndex, 0, currentTask);
+
+    console.log(currentIndex, dropIndex);
 
     setBoards(
       boards.map((b) => {
@@ -76,6 +74,16 @@ export const TasksList = ({
     );
   }
 
+  if (!board.tasks.length) {
+    return (
+      <div className={styles.taskList}>
+        <div className={styles.title}>
+          <h2>No {board.title.toLowerCase()}</h2>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.taskList}>
       <div className={styles.title}>
@@ -84,13 +92,13 @@ export const TasksList = ({
       <ul className={styles.list}>
         {board.tasks.map((task) => (
           <TaskItem
+            key={task.id}
             onDragOver={(e) => dragOverHandler(e)}
             onDragLeave={(e) => dragLeaveHandler(e)}
             onDragStart={(e) => dragStartHandler(e, board, task)}
             onDragEnd={(e) => dragEndHandler(e)}
             onDrop={(e) => dropHandler(e, board, task)}
             draggble={true}
-            key={task.id}
             task={task}
           />
         ))}

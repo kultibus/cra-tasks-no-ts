@@ -43,8 +43,8 @@ export const Tasks = ({ boards, setBoards }) => {
           // currentTask={currentTask}
           // setCurrentTask={setCurrentTask}
           // setCurrentBoard={setCurrentBoard}
-					setBoards={setBoards}
-					boards={boards}
+          setBoards={setBoards}
+          boards={boards}
         />
       ))}
     </main>

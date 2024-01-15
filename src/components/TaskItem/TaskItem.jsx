@@ -1,9 +1,9 @@
 import cn from "classnames";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import delIcon from "../../assets/icons/del.png";
 import editIcon from "../../assets/icons/edit.png";
 import { AppContext } from "../../context";
-import { useOpacity } from "../../hooks/useOpacity";
+import { useSelector } from "../../hooks/useSelector";
 import { DateHandler } from "../../utils/dateHandler";
 import { ButtonIcon } from "../UI/buttons/ButtonIcon/ButtonIcon";
 import styles from "./taskItem.module.scss";
@@ -16,7 +16,7 @@ export const TaskItem = ({ task, ...props }) => {
 
   const dates = new DateHandler(date);
 
-  const opacity = useOpacity(styles.created, task);
+  const selector = useSelector(styles.created);
 
   const { setCurrentTask, setModalType, setModalOpened } =
     useContext(AppContext);
@@ -29,7 +29,7 @@ export const TaskItem = ({ task, ...props }) => {
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
       onDrop={onDrop}
-      className={cn(styles.task, opacity)}
+      className={cn(styles.task, selector)}
     >
       <div className={styles.title}>
         <h3>{title}</h3>

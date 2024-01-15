@@ -1,10 +1,10 @@
 import cn from "classnames";
 import { useContext, useEffect } from "react";
-import { useOpacity } from "../../../hooks/useOpacity";
-import styles from "./modal.module.scss";
 import { AppContext } from "../../../context";
+import { useSelector } from "../../../hooks/useSelector";
+import styles from "./modal.module.scss";
 
-export const Modal = ({ children, modalOpened, setModalOpened }) => {
+export const Modal = ({ children, setModalOpened }) => {
   const { currentTask, deleteTask, modalType } = useContext(AppContext);
 
   useEffect(() => {
@@ -22,13 +22,13 @@ export const Modal = ({ children, modalOpened, setModalOpened }) => {
     return () => {
       window.removeEventListener("keydown", closeOnKey);
     };
-  }, [setModalOpened]);
+  }, [setModalOpened, currentTask, deleteTask, modalType]);
 
-  const opacity = useOpacity(styles.opened, modalOpened);
+  const selector = useSelector(styles.opened);
 
   return (
     <div
-      className={cn(styles.modal, opacity)}
+      className={cn(styles.modal, selector)}
       onClick={() => setModalOpened(false)}
     >
       <div className={styles.content} onClick={(e) => e.stopPropagation()}>
