@@ -19,7 +19,7 @@ export const CreateTask = (props) => {
       <div className={styles.header}>
         <h2>Create new task</h2>
 
-        <Button type={"button"} onClick={() => setModalOpened(false)}>
+        <Button type="button" onClick={() => setModalOpened(false)}>
           <Cross />
         </Button>
       </div>
@@ -38,6 +38,9 @@ export const CreateTask = (props) => {
           inputValidate={inputValidate}
         />
         <Input
+          onClick={() => {
+            setInputValidate(true);
+          }}
           value={newTask.description}
           onChange={(e) =>
             setNewTask({ ...newTask, description: e.target.value })
@@ -47,6 +50,9 @@ export const CreateTask = (props) => {
         />
 
         <Input
+          onClick={() => {
+            setInputValidate(true);
+          }}
           value={newTask.date}
           onChange={(e) => {
             setNewTask({ ...newTask, date: e.target.value });

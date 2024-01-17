@@ -3,13 +3,15 @@ import styles from "./input.module.scss";
 import cn from "classnames";
 
 export const Input = ({ inputValidate, ...props }) => {
-  const [validate, setValidate] = useState(null);
+  const [property, setProperty] = useState(false);
 
+	
   useEffect(() => {
-    if (inputValidate !== undefined) {
-      setValidate({ [styles.noValidate]: !inputValidate });
+		if (inputValidate !== undefined) {
+			console.log(inputValidate)
+      setProperty(() => ({ [styles.noValidate]: !inputValidate }));
     }
   }, [inputValidate]);
 
-  return <input className={cn(styles.input, validate)} {...props} />;
+  return <input className={cn(styles.input, property)} {...props} />;
 };

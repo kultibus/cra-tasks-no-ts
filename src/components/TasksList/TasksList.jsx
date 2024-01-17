@@ -18,32 +18,43 @@ export const TasksList = ({
 
   const [currentBoard, setCurrentBoard] = useState(null);
 
+
+  const addBg = (e) => {
+    const el = e.target.closest("li");
+    el.classList.add(styles.activeTask)
+  };
+
+  const removeBg = (e) => {
+    const el = e.target.closest("li");
+    el.classList.remove(styles.activeTask)
+  };
+
+
   function dragOverHandler(e) {
     e.preventDefault();
 
-    // const item = e.target.closest("li");
+    addBg(e)
 
-    // if (item) {
-    //   item.style.opacity = 0.5;
-    // }
   }
 
   function dragLeaveHandler(e) {
-    // e.target.style.opacity = 1;
+		removeBg(e)
+		
   }
-
+	
   function dragStartHandler(e, board, task) {
-    setCurrentBoard(board);
+		setCurrentBoard(board);
     setCurrentTask(task);
   }
-
+	
   function dragEndHandler(e) {
-    // e.target.style.opacity = 1;
+		removeBg(e)
   }
-
+	
   function dropHandler(e, board, task) {
-    e.preventDefault();
-    // e.target.style.opacity = 1;
+		e.preventDefault();
+		
+		removeBg(e)
 
     const currentIndex = currentBoard.tasks.indexOf(currentTask);
     const dropIndex = board.tasks.indexOf(task);
@@ -85,10 +96,10 @@ export const TasksList = ({
         {board.tasks.map((task) => (
           <TaskItem
             key={task.id}
-            onDragOver={(e) => dragOverHandler(e)}
-            onDragLeave={(e) => dragLeaveHandler(e)}
+            onDragOver={(e) => dragOverHandler(e, task)}
+            onDragLeave={(e) => dragLeaveHandler(e, task)}
             onDragStart={(e) => dragStartHandler(e, board, task)}
-            onDragEnd={(e) => dragEndHandler(e)}
+            onDragEnd={(e) => dragEndHandler(e, task)}
             onDrop={(e) => dropHandler(e, board, task)}
             draggble={true}
             task={task}
