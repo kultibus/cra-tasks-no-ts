@@ -18,43 +18,39 @@ export const TasksList = ({
 
   const [currentBoard, setCurrentBoard] = useState(null);
 
-
   const addBg = (e) => {
     const el = e.target.closest("li");
-    el.classList.add(styles.activeTask)
+    el.classList.add(styles.activeTask);
   };
 
   const removeBg = (e) => {
     const el = e.target.closest("li");
-    el.classList.remove(styles.activeTask)
+    el.classList.remove(styles.activeTask);
   };
-
 
   function dragOverHandler(e) {
     e.preventDefault();
 
-    addBg(e)
-
+    addBg(e);
   }
 
   function dragLeaveHandler(e) {
-		removeBg(e)
-		
+    removeBg(e);
   }
-	
+
   function dragStartHandler(e, board, task) {
-		setCurrentBoard(board);
+    setCurrentBoard(board);
     setCurrentTask(task);
   }
-	
+
   function dragEndHandler(e) {
-		removeBg(e)
+    removeBg(e);
   }
-	
+
   function dropHandler(e, board, task) {
-		e.preventDefault();
-		
-		removeBg(e)
+    e.preventDefault();
+
+    removeBg(e);
 
     const currentIndex = currentBoard.tasks.indexOf(currentTask);
     const dropIndex = board.tasks.indexOf(task);

@@ -5,10 +5,8 @@ import cn from "classnames";
 export const Input = ({ inputValidate, ...props }) => {
   const [property, setProperty] = useState(false);
 
-	
   useEffect(() => {
-		if (inputValidate !== undefined) {
-			console.log(inputValidate)
+    if (inputValidate !== undefined) {
       setProperty(() => ({ [styles.noValidate]: !inputValidate }));
     }
   }, [inputValidate]);
