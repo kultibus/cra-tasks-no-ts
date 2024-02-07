@@ -7,8 +7,9 @@ export const Tasks = ({ boards, setBoards }) => {
 
   // const [currentBoard, setCurrentBoard] = useState(null);
 
-  // function dragOverHandler(e) {
+  // function dragOverHandler(e, board) {
   //   e.preventDefault();
+	// 	console.log(board)
   // }
 
   // function dropCardHandler(e, board) {
@@ -38,7 +39,7 @@ export const Tasks = ({ boards, setBoards }) => {
           // title={board.title}
           // tasks={board.tasks}
           board={board}
-          // onDragOver={(e) => dragOverHandler(e)}
+          // onDragOver={(e) => dragOverHandler(e, board)}
           // onDrop={(e) => dropCardHandler(e, board)}
           // currentTask={currentTask}
           // setCurrentTask={setCurrentTask}

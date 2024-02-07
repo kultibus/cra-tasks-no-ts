@@ -11,7 +11,7 @@ export const TasksList = ({
   // currentTask,
   // setCurrentTask,
   // setCurrentBoard,
-  // onDragOver,
+  onDragOver,
   // onDrop,
 }) => {
   const [currentTask, setCurrentTask] = useState(null);
@@ -84,7 +84,7 @@ export const TasksList = ({
   }
 
   return (
-    <div className={styles.taskList}>
+    <div onDragOver={onDragOver} className={styles.taskList}>
       <div className={styles.title}>
         <h2>{board.title}</h2>
       </div>
