@@ -6,17 +6,20 @@ export const TasksList = ({
   // title,
   // tasks,
   board,
-  setBoards,
-  boards,
-  // currentTask,
-  // setCurrentTask,
-  // setCurrentBoard,
+  // setBoards,
+  // boards,
+  currentTask,
+  setCurrentTask,
+  currentBoard,
+  setCurrentBoard,
   onDragOver,
-  // onDrop,
+  onDrop,
+  // setDropIndex,
+  // setCurrentIndex,
 }) => {
-  const [currentTask, setCurrentTask] = useState(null);
+  // const [currentTask, setCurrentTask] = useState(null);
 
-  const [currentBoard, setCurrentBoard] = useState(null);
+  // const [currentBoard, setCurrentBoard] = useState(null);
 
   const addBg = (e) => {
     const el = e.target.closest("li");
@@ -53,24 +56,34 @@ export const TasksList = ({
     removeBg(e);
 
     const currentIndex = currentBoard.tasks.indexOf(currentTask);
+    // setCurrentIndex(currentIndex);
+
     const dropIndex = board.tasks.indexOf(task);
+    // setDropIndex(dropIndex);
 
-    if (dropIndex !== currentIndex) {
-      currentBoard.tasks.splice(currentIndex, 1);
-      board.tasks.splice(dropIndex, 0, currentTask);
-    }
+		currentBoard.tasks.splice(currentIndex, 1);
+		currentBoard.tasks.splice(dropIndex, 0, currentTask);
+    // if (board.id === currentBoard.id && dropIndex !== currentIndex) {
+    // }
 
-    setBoards(
-      boards.map((b) => {
-        if (b.id === board.id) {
-          return board;
-        }
-        if (b.id === currentBoard.id) {
-          return currentBoard;
-        }
-        return b;
-      })
-    );
+		// console.log(currentIndex, dropIndex)
+
+    // if (dropIndex !== currentIndex) {
+    //   currentBoard.tasks.splice(currentIndex, 1);
+    //   board.tasks.splice(dropIndex, 0, currentTask);
+    // }
+
+    // setBoards(
+    //   boards.map((b) => {
+    //     if (b.id === board.id) {
+    //       return board;
+    //     }
+    //     if (b.id === currentBoard.id) {
+    //       return currentBoard;
+    //     }
+    //     return b;
+    //   })
+    // );
   }
 
   if (!board.tasks.length) {
@@ -79,16 +92,21 @@ export const TasksList = ({
         <div className={styles.title}>
           <h2>No {board.title.toLowerCase()}</h2>
         </div>
+        <ul
+          onDragOver={onDragOver}
+          onDrop={onDrop}
+          className={styles.list}
+        ></ul>
       </div>
     );
   }
 
   return (
-    <div onDragOver={onDragOver} className={styles.taskList}>
+    <div className={styles.taskList}>
       <div className={styles.title}>
         <h2>{board.title}</h2>
       </div>
-      <ul className={styles.list}>
+      <ul onDragOver={onDragOver} onDrop={onDrop} className={styles.list}>
         {board.tasks.map((task) => (
           <TaskItem
             key={task.id}
