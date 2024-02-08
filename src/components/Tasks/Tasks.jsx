@@ -15,7 +15,6 @@ export const Tasks = ({ boards, setBoards }) => {
     const currentIndex = currentBoard.tasks.indexOf(currentTask);
 
     if (!e.target.closest("li")) {
-      console.log("ok");
       board.tasks.push(currentTask);
       currentBoard.tasks.splice(currentIndex, 1);
     }
