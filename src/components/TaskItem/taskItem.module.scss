@@ -10,7 +10,7 @@
     opacity var(--trs);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 8px;
   opacity: 0;
 
   &.created {
@@ -36,6 +36,7 @@
       @include subTitle();
       text-transform: uppercase;
       color: var(--color-green-light);
+      // color: var(--color-blue-dark);
       line-height: 1.2;
     }
 
@@ -48,38 +49,42 @@
   }
 
   .descr {
-    color: var(--color-blue-dark);
-    @include text();
+    // color: var(--color-blue-dark);
+    color: var(--color-green-light);
+    @include paragraph();
     line-height: 1.2;
   }
 
   .bottom {
     @include text();
     color: var(--color-green-light);
+    // color: var(--color-blue-dark);
+    // text-transform: uppercase;
 
     .row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       &:not(:last-child) {
-        margin-bottom: 8px;
+        margin-bottom: 6px;
       }
     }
 
     .date {
       border-radius: 5px;
-      padding: 4px 8px;
-      border: 2px solid var(--color-green-light);
+      padding: 2px 8px;
+      color: var(--color-green-bright);
+      border: 2px solid var(--color-green-bright);
       font-weight: 600;
     }
 
     .week {
-      color: var(--color-green-bright);
-      border: 2px solid var(--color-green-bright);
-    }
-    .threeDays {
       color: var(--color-warning-yellow);
       border: 2px solid var(--color-warning-yellow);
+    }
+    .threeDays {
+      color: var(--color-warning-red);
+      border: 2px solid var(--color-warning-red);
     }
   }
 }

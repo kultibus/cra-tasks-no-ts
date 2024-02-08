@@ -21,23 +21,6 @@ export default function App() {
     date: "",
   });
 
-  // const [boards, setBoards] = useState([
-  //   {
-  //     id: 1,
-  //     title: "Opened tasks",
-  //     tasks: [{ title: "1.1" }, { title: "1.2" }, { title: "1.3" }],
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "Tasks in process",
-  //     tasks: [{ title: "2.1" }, { title: "2.2" }, { title: "2.3" }],
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "Accomplished tasks",
-  //     tasks: [{ title: "3.1" }, { title: "3.2" }, { title: "3.3" }],
-  //   },
-  // ]);
   const [boards, setBoards] = useState([
     {
       id: 1,

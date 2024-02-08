@@ -7,33 +7,18 @@ export const Tasks = ({ boards, setBoards }) => {
 
   const [currentBoard, setCurrentBoard] = useState(null);
 
-  // const [dropIndex, setDropIndex] = useState(null);
-
-  // const [currentIndex, setCurrentIndex] = useState(null);
-
-  function dragOverHandler(e, board) {
+  function dragOverHandler(e) {
     e.preventDefault();
   }
 
   function dropCardHandler(e, board) {
-    // if (board.id !== currentBoard.id && dropIndex !== currentIndex) {
-    // 	currentBoard.tasks.splice(currentIndex, 1);
-    // 	board.tasks.splice(dropIndex, 0, currentTask);
-    // }
-
-    // const dropIndex = board.tasks.indexOf(dropTask);
-
-    // if (dropIndex !== currentIndex) {
-    // }
-
     const currentIndex = currentBoard.tasks.indexOf(currentTask);
 
-    if (!board.tasks.length) {
+    if (!e.target.closest("li")) {
+      console.log("ok");
       board.tasks.push(currentTask);
       currentBoard.tasks.splice(currentIndex, 1);
     }
-
-    console.log(currentIndex);
 
     setBoards(
       boards.map((b) => {
@@ -53,20 +38,13 @@ export const Tasks = ({ boards, setBoards }) => {
       {boards.map((board) => (
         <TasksList
           key={board.id}
-          // title={board.title}
-          // tasks={board.tasks}
           board={board}
-          onDragOver={(e) => dragOverHandler(e, board)}
-          onDrop={(e) => dropCardHandler(e, board)}
           currentTask={currentTask}
           setCurrentTask={setCurrentTask}
           currentBoard={currentBoard}
           setCurrentBoard={setCurrentBoard}
-          // setBoards={setBoards}
-          // boards={boards}
-          // dropTask={dropTask}
-          // setDropIndex={setDropIndex}
-          // setCurrentIndex={setCurrentIndex}
+          onDragOver={(e) => dragOverHandler(e)}
+          onDrop={(e) => dropCardHandler(e, board)}
         />
       ))}
     </main>

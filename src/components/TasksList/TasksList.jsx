@@ -1,44 +1,27 @@
-import { useState } from "react";
 import { TaskItem } from "../TaskItem/TaskItem";
 import styles from "./index.module.scss";
 
+import { ToggleBg } from "../../utils/toggleBg";
+
 export const TasksList = ({
-  // title,
-  // tasks,
   board,
-  // setBoards,
-  // boards,
   currentTask,
   setCurrentTask,
   currentBoard,
   setCurrentBoard,
   onDragOver,
   onDrop,
-  // setDropIndex,
-  // setCurrentIndex,
+  onDragLeave,
+  onDragEnd,
 }) => {
-  // const [currentTask, setCurrentTask] = useState(null);
-
-  // const [currentBoard, setCurrentBoard] = useState(null);
-
-  const addBg = (e) => {
-    const el = e.target.closest("li");
-    el.classList.add(styles.activeTask);
-  };
-
-  const removeBg = (e) => {
-    const el = e.target.closest("li");
-    el.classList.remove(styles.activeTask);
-  };
-
   function dragOverHandler(e) {
     e.preventDefault();
 
-    addBg(e);
+    ToggleBg.addTaskBg(e, styles.activeTask);
   }
 
   function dragLeaveHandler(e) {
-    removeBg(e);
+    ToggleBg.removeTaskBg(e, styles.activeTask);
   }
 
   function dragStartHandler(e, board, task) {
@@ -47,43 +30,19 @@ export const TasksList = ({
   }
 
   function dragEndHandler(e) {
-    removeBg(e);
+    ToggleBg.removeTaskBg(e, styles.activeTask);
   }
 
   function dropHandler(e, board, task) {
     e.preventDefault();
 
-    removeBg(e);
+    ToggleBg.removeTaskBg(e, styles.activeTask);
 
     const currentIndex = currentBoard.tasks.indexOf(currentTask);
-    // setCurrentIndex(currentIndex);
 
     const dropIndex = board.tasks.indexOf(task);
-    // setDropIndex(dropIndex);
-
-		currentBoard.tasks.splice(currentIndex, 1);
-		currentBoard.tasks.splice(dropIndex, 0, currentTask);
-    // if (board.id === currentBoard.id && dropIndex !== currentIndex) {
-    // }
-
-		// console.log(currentIndex, dropIndex)
-
-    // if (dropIndex !== currentIndex) {
-    //   currentBoard.tasks.splice(currentIndex, 1);
-    //   board.tasks.splice(dropIndex, 0, currentTask);
-    // }
-
-    // setBoards(
-    //   boards.map((b) => {
-    //     if (b.id === board.id) {
-    //       return board;
-    //     }
-    //     if (b.id === currentBoard.id) {
-    //       return currentBoard;
-    //     }
-    //     return b;
-    //   })
-    // );
+    currentBoard.tasks.splice(currentIndex, 1);
+    board.tasks.splice(dropIndex, 0, currentTask);
   }
 
   if (!board.tasks.length) {
@@ -95,6 +54,8 @@ export const TasksList = ({
         <ul
           onDragOver={onDragOver}
           onDrop={onDrop}
+          onDragLeave={onDragLeave}
+          onDragEnd={onDragEnd}
           className={styles.list}
         ></ul>
       </div>
@@ -106,7 +67,13 @@ export const TasksList = ({
       <div className={styles.title}>
         <h2>{board.title}</h2>
       </div>
-      <ul onDragOver={onDragOver} onDrop={onDrop} className={styles.list}>
+      <ul
+        onDragOver={onDragOver}
+        onDrop={onDrop}
+        onDragLeave={onDragLeave}
+        onDragEnd={onDragEnd}
+        className={styles.list}
+      >
         {board.tasks.map((task) => (
           <TaskItem
             key={task.id}
