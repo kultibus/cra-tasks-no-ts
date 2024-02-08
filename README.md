@@ -2,6 +2,10 @@
 
 This is my first PET project using **React**
 
+## Watch deployed on GH Pages
+
+[Link](https://kultibus.github.io/cra-tasks-no-ts/)
+
 ## Local run
 
 - yarn
