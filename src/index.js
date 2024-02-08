@@ -28,5 +28,3 @@ root.render(
     {/* <RouterProvider router={router} fallbackElement={<div>Loading</div>} /> */}
   </React.StrictMode>
 );
-
-
